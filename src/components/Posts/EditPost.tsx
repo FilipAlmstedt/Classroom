@@ -131,7 +131,9 @@ export const EditPost = () => {
                 <input type="text" name="post-title" defaultValue={post?.title} hidden/>
                 <input type="text" name="link" defaultValue={getURL} hidden/>
                 <input type="text" name="owner" defaultValue={post?.owner} hidden/>
-                {!allowedToEdit ? <button type="submit" onClick={sendRequest}>Want to help? Send invite request!</button>: null}
+                
+                
+                {!allowedToEdit && auth.currentUser ? <button type="submit" onClick={sendRequest}>Want to help? Send invite request!</button> : !allowedToEdit && !auth.currentUser ? <button disabled type="submit" onClick={sendRequest}>Want to help? Send invite request!</button> : null}
             </form>
             <p className="success-msg">{successMessage}</p>
 
@@ -197,9 +199,15 @@ export const EditPost = () => {
                     }}
                 />}
             </div>
+            {allowedToEdit 
+            ? 
             <div>
                 <button onClick={updateCode}>Update</button>
-            </div>
+            </div> 
+            : 
+            <div>
+                <button disabled onClick={updateCode}>Update</button>
+            </div>}
 
             <div className="result-frame"><ShowPostedCode htmlCode={newHtml} cssCode={newCss}/></div>
 

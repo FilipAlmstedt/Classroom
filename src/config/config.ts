@@ -11,7 +11,8 @@ const config = {
     emailJSConfig: {
         serviceId: process.env.REACT_APP_SERVICEID,
         templateId: process.env.REACT_APP_TEMPLATEID,
-        userId: process.env.REACT_APP_USERID
+        userId: process.env.REACT_APP_USERID,
+        templateIdInviteAccepted: process.env.REACT_APP_TEMPLATEID_INVITE_ACCEPTED
     }
 }
 

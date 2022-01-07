@@ -20,16 +20,27 @@ export const AcceptOrDecline = () => {
         await signOut(auth);
     }
 
-    const sendEmail = (e: any) => {
+    const sendEmailAccept = (e: any) => {
         e.preventDefault();
     
-        emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateId || "", e.target, config.emailJSConfig.userId)
+        emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdInviteAccepted || "", e.target, config.emailJSConfig.userId)
           .then((result) => {
               console.log(result.text);
           }, (error) => {
               console.log(error.text);              
           });
     };
+
+    // const sendEmailAcceptDecline = (e: any) => {
+    //     e.preventDefault();
+    
+    //     emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateId || "", e.target, config.emailJSConfig.userId)
+    //       .then((result) => {
+    //           console.log(result.text);
+    //       }, (error) => {
+    //           console.log(error.text);              
+    //       });
+    // };
 
     const collectDoc = async () => {
         const docRef = doc(db, "post", id || "");
@@ -98,7 +109,20 @@ export const AcceptOrDecline = () => {
             <h1>{post?.pendingCollaborators}</h1>
 
             {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
-            <form onSubmit={sendEmail}>
+            <form onSubmit={sendEmailAccept}>
+                <input type="text" name="collaborator" defaultValue={post?.pendingCollaborators[post.pendingCollaborators.length-1]} hidden/>
+                <input type="text" name="post-title" defaultValue={post?.title} hidden/>
+                <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+                
+                <div>
+                    <p className="success-msg">{acceptHelp}</p>
+                    <button type="submit" onClick={accept}>Want to help? Send invite request!</button>
+                    <button onClick={decline}>Decline</button>
+                    <p className="error-msg">{declineHelp}</p>
+                </div>
+            </form>
+
+            {/* <form onSubmit={sendEmailDecline}>
                 <input type="text" name="new-member-email" defaultValue={""} hidden/>
                 <input type="text" name="post-title" defaultValue={""} hidden/>
                 <input type="text" name="link" defaultValue={""} hidden/>
@@ -109,7 +133,7 @@ export const AcceptOrDecline = () => {
                     <button onClick={decline}>Decline</button>
                     <p className="error-msg">{declineHelp}</p>
                 </div>
-            </form>
+            </form> */}
             
         </>
     );
