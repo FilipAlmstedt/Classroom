@@ -10,9 +10,11 @@ const config = {
     },
     emailJSConfig: {
         serviceId: process.env.REACT_APP_SERVICEID,
-        templateId: process.env.REACT_APP_TEMPLATEID,
+        templateIdEditRequest: process.env.REACT_APP_TEMPLATEID_EDIT_REQUEST,
         userId: process.env.REACT_APP_USERID,
-        templateIdInviteAccepted: process.env.REACT_APP_TEMPLATEID_INVITE_ACCEPTED
+        templateIdInviteAccepted: process.env.REACT_APP_TEMPLATEID_INVITE_ACCEPTED,
+        templateIdInviteDeclined: process.env.REACT_APP_TEMPLATEID_INVITE_DECLINED,
+        templateIdCollaboratorEdits: process.env.REACT_APP_TEMPLATEID_COLLABORATOR_EDITS
     }
 }
 

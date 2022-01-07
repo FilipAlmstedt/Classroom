@@ -12,14 +12,11 @@ export const ShowPosts = () => {
     
 
     const getPosts = async () => {
-
         const data = await getDocs(first); 
         storeData(data);
-
     }
 
     const getMoreDocs = async () => {
-  
         const previousData = await getDocs(first); 
         const lastVisible = previousData.docs[previousData.docs.length-1];
         const next = query(collection(db, "post"),
@@ -29,7 +26,6 @@ export const ShowPosts = () => {
 
         const data = await getDocs(next);
         storeData(data);
-        
     }
 
      const storeData = (data: QuerySnapshot<DocumentData>) => {
