@@ -9,6 +9,7 @@ export class Post {
       public owner: string,
       public members: string[],
       public date: Date,
+      public pendingCollaborators: string[]
     ) {}
 }
   

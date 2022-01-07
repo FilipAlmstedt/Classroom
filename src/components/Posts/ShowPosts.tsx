@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import { db } from '../firebase';
-import { collection, query, orderBy, limit, getDocs, QuerySnapshot, DocumentData } from "firebase/firestore";  
-import { Post } from '../Models/Post';
+import { db } from '../../firebase';
+import { collection, query, orderBy, startAfter, limit, getDocs, QuerySnapshot, DocumentData } from "firebase/firestore";  
+import { Post } from '../../Models/Post';
 import { Link } from 'react-router-dom';
 
-export const LandingPage = () => {
+export const ShowPosts = () => {
 
     const [posts, setPosts] = useState<Post[]>([]);
 
-    const first = query(collection(db, "post"), orderBy("date", "desc"),  limit(4));
+    const first = query(collection(db, "post"), orderBy("date"), limit(3));
     
 
     const getPosts = async () => {
@@ -16,6 +16,20 @@ export const LandingPage = () => {
         const data = await getDocs(first); 
         storeData(data);
 
+    }
+
+    const getMoreDocs = async () => {
+  
+        const previousData = await getDocs(first); 
+        const lastVisible = previousData.docs[previousData.docs.length-1];
+        const next = query(collection(db, "post"),
+        orderBy("date"),
+        startAfter(lastVisible),
+        limit(3));
+
+        const data = await getDocs(next);
+        storeData(data);
+        
     }
 
      const storeData = (data: QuerySnapshot<DocumentData>) => {
@@ -51,8 +65,8 @@ export const LandingPage = () => {
     return (
         <>
             <div className="landing-page-container">
-                <h1>This is the LANDING PAGE</h1>
-                <h1>Recent Posts:</h1>
+                <h1>Look at the problems people have:</h1>
+                <h1>Posts:</h1>
                 {posts.map((post) => {
                     return(
                         <div key={post.id}>
@@ -61,7 +75,7 @@ export const LandingPage = () => {
                         </div>
                     );     
                 })}
-                
+                <button onClick={getMoreDocs}>Load more!</button>
             </div>
         </>
     );

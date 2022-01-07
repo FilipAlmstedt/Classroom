@@ -22,7 +22,7 @@ export const CreateNewPost = () => {
 
     const createNewPost = async () => {
         
-        await addDoc(postsCollectionRef, {desc: desc , title: title, comments: [], css: cssCode, html: htmlCode, projectOwner: auth.currentUser?.email, members: [], date: Date.now()}).catch((err) => {
+        await addDoc(postsCollectionRef, {desc: desc , title: title, comments: [], css: cssCode, html: htmlCode, projectOwner: auth.currentUser?.email, members: [], date: Date.now(), pendingCollaborators: []}).catch((err) => {
             console.log(err);
         });
         

@@ -25,7 +25,7 @@ export const Navbar = () => {
     const logout = async () => {
         localStorage.setItem("loggedInUser", "");
         await signOut(auth);
-        navigate("/")
+        navigate("/");
     };
     
     return (
@@ -34,9 +34,10 @@ export const Navbar = () => {
                 <Link to="/"><h2>Classroom</h2></Link>
                 <nav>
                     <ul>
-                    {checkUserLoggedIn ? <div onClick={logout}><li>Log out</li></div>: <Link to="/login"><li>Log in</li></Link>}
-                    {checkUserLoggedIn ? <li><Link to="/create-new-post">Create new Post</Link></li>: null}
-                    {checkUserLoggedIn ? <p>Welcome {auth.currentUser?.email}</p>: null}
+                        <li><Link to="/show-posts">Show Posts</Link></li>
+                        {checkUserLoggedIn ? <li><Link to="/create-new-post">Create new Post</Link></li>: null}
+                        {checkUserLoggedIn ? <div onClick={logout}><li><Link to="">Log out</Link></li></div>: <Link to="/login"><li>Log in</li></Link>}
+                        {checkUserLoggedIn ? <p>Welcome {auth.currentUser?.email}</p>: null}
                     </ul>
                 </nav>
             </header>

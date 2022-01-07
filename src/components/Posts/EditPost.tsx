@@ -22,13 +22,18 @@ export const EditPost = () => {
     const [newHtml, setNewhtml] = useState("");
     const [newCss, setNewCss] = useState("");
     const [allowedToEdit, setAllowedToEdit] = useState(false);
-    
+    const [successMessage, setSuccessMessage] = useState("");
+
     const sendEmail = (e: any) => {
         e.preventDefault();
     
         emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateId || "", e.target, config.emailJSConfig.userId)
           .then((result) => {
-              console.log(result.text);
+              
+            setSuccessMessage("An email has been send to the project owner. You will get an email if the owner has accepted your request. Keep an eye your inbox!");
+            setTimeout(() => {
+                console.log(result.text);
+            }, 20000) 
           }, (error) => {
               console.log(error.text);              
           });
@@ -48,6 +53,7 @@ export const EditPost = () => {
             docSnap.data()?.projectOwner,
             docSnap.data()?.members,
             docSnap.data()?.date,
+            docSnap.data()?.pendingCollaborators
         ); 
 
         setNewhtml(collectedPost.html);
@@ -95,17 +101,39 @@ export const EditPost = () => {
             desc: post?.description,
             members: post?.members,
             projectOwner: post?.owner,
-            title: post?.title
+            title: post?.title,
+            pendingCollaborators: post?.pendingCollaborators
 
         }).then(() => {
             console.log("Updated post");
         })
     }
+    
+    const sendRequest = async () => {
+        let newcollaborator: string = auth.currentUser?.email?.toString() || "";
+        post?.pendingCollaborators.push(newcollaborator);
+
+        setPost(post);
+        updateCode();
+    }
+
 
     return (
 
         <>
             <h1>{post?.title}</h1>
+
+            {allowedToEdit ? <p className="info-msg">You are the owner of this post!</p>: <p className="info-msg">If you want to help, send a request to edit code and see if the owner wants help!</p>}
+
+            {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
+            <form onSubmit={sendEmail}>
+                <input type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
+                <input type="text" name="post-title" defaultValue={post?.title} hidden/>
+                <input type="text" name="link" defaultValue={getURL} hidden/>
+                <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+                {!allowedToEdit ? <button type="submit" onClick={sendRequest}>Want to help? Send invite request!</button>: null}
+            </form>
+            <p className="success-msg">{successMessage}</p>
 
             <div className="coding-input-container">
                 {allowedToEdit ? <CodeEditor 
@@ -175,13 +203,7 @@ export const EditPost = () => {
 
             <div className="result-frame"><ShowPostedCode htmlCode={newHtml} cssCode={newCss}/></div>
 
-            {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
-            <form onSubmit={sendEmail}>
-                <input type="text" name="new-member-email" defaultValue={post?.owner || ""} hidden/>
-                <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                <input type="text" name="link" defaultValue={getURL} hidden/>
-                <button type="submit">Want to help? Send invite request!</button>
-            </form>
+            
         </>
 
     );
