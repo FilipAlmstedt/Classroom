@@ -34,6 +34,7 @@ export const EditPost = () => {
     
         if(post) {    
             if(post.pendingCollaborators.length !== 0) {
+                // eslint-disable-next-line array-callback-return
                 post.pendingCollaborators.map((collaborator) => {
                     if(auth.currentUser?.email === collaborator) {    
                         setSuccessMsg("");
@@ -76,6 +77,7 @@ export const EditPost = () => {
         if(post?.owner !== auth.currentUser?.email) {
             if(post) {
                 if(post.members.length !== 0) {
+                    // eslint-disable-next-line array-callback-return
                     post.members.map((member) => {
                         if(member === auth.currentUser?.email) {
                             emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdCollaboratorEdits || "", e.target, config.emailJSConfig.userId)

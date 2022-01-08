@@ -1,10 +1,9 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { auth, db } from "../../firebase";
+import { db } from "../../firebase";
 import { Post } from "../../Models/Post";
 import emailjs from '@emailjs/browser';
-import { signOut } from "firebase/auth";
 import config from "../../config/config";
 
 export const AcceptOrDecline = () => {
@@ -15,7 +14,7 @@ export const AcceptOrDecline = () => {
     // Messages that appears when the user presses the buttons either accept or decline
     const [acceptHelp, setAcceptHelp] = useState("");
     const [declineHelp, setDeclineHelp] = useState("");
-    
+
     const sendEmailAccept = (e: any) => {
         e.preventDefault();
     
@@ -89,7 +88,6 @@ export const AcceptOrDecline = () => {
     }
 
     useEffect(() => {
-        //logout();
         collectDoc();
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
