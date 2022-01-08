@@ -1,3 +1,42 @@
 header {
-    max-height: 15vh;
+    min-height: 15vh;
+    background-color: black;
+    color: white;
+
+
+    @include flexStyling(column, center);
+
+    @include desktopsOnly() {
+        @include flexStyling(row, space-between);
+        .header-title {
+            margin-left: 30%;
+        }
+    }   
+
+    
+
+    ul {
+
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+
+        @include desktopsOnly() {
+            @include flexStyling(row, center);
+        }   
+
+       
+        list-style: none;
+        li {
+            @include desktopsOnly() {
+                margin-left: 5%;
+                margin-right: 5%;
+                width: 200px;
+            }   
+
+            a {
+                color: white;
+            }
+        }
+    }
 }

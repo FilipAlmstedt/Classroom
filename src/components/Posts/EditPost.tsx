@@ -167,8 +167,8 @@ export const EditPost = () => {
                 pendingCollaborators: post?.pendingCollaborators
 
             }).then(() => {
-                console.log("Successfull update!");
-                setSuccessfulUpdateMsg("Successfull update!");
+                console.log("Successful update!");
+                setSuccessfulUpdateMsg("Successful update!");
             })
 
     }

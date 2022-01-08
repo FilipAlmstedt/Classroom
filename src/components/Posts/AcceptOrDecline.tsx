@@ -26,7 +26,7 @@ export const AcceptOrDecline = () => {
                 setPost(post);
 
                 setAcceptHelp("You have approved help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + " This account has now access to edit your code. You can now please close this window!")
-                post?.pendingCollaborators.splice(0,post?.pendingCollaborators.length);
+                post?.pendingCollaborators.pop();
                 updateDoc();
                 
           }, (error) => {
@@ -41,7 +41,7 @@ export const AcceptOrDecline = () => {
           .then(() => {
                 setDeclineHelp("You have declined help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + " You can now please close this window!");
                 setPost(post);
-                post?.pendingCollaborators.splice(0,post?.pendingCollaborators.length);
+                post?.pendingCollaborators.pop();
                 updateDoc();
           }, (error) => {
               console.log(error.text);              
