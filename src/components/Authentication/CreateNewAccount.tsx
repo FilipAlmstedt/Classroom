@@ -1,6 +1,6 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 
 export const CreateNewAccount = () => {
@@ -8,33 +8,37 @@ export const CreateNewAccount = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [comfirmPassword, setConfirmPassword] = useState("");
 
     const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
 
     const registerNewAccount = async () => {
-      
-        await createUserWithEmailAndPassword(auth, email, password).then(() => {navigate("/login")}).catch((err) => {
-          if(err.code === "auth/email-already-in-use") {
-            setEmailError("Account already exists! Please use another email!");
-            navigate("/register");       
-          }
-          if(err.code === "auth/invalid-email") {
-            setEmailError("Invalid email! Please try again!");
-            navigate("/register");       
-          }
-          if(err.code === "auth/weak-password") {
-            setPasswordError("Weak Password! Password should be at least 6 characters!");
-            console.log("Test");
-            navigate("/register");       
-          }
-        });
+
+        if(password === comfirmPassword) {
+          await createUserWithEmailAndPassword(auth, email, password).then(() => {navigate("/login")}).catch((err) => {
+            if(err.code === "auth/email-already-in-use") {
+              setEmailError("Account already exists! Please use another email!");
+              navigate("/register");       
+            }
+            if(err.code === "auth/invalid-email") {
+              setEmailError("Invalid email! Please try again!");
+              navigate("/register");       
+            }
+            if(err.code === "auth/weak-password") {
+              setPasswordError("Weak Password! Password should be at least 6 characters!");
+              navigate("/register");       
+            }
+          });
+        } else {
+          setPasswordError("Passwords must match! Please try again!");
+        }
     }
 
     return (
 
-        <div>
-        <h3> Register User </h3>
+      <div className="">
+        <h1> Register a new user! </h1>
         <input
           type="text"
           placeholder="Email..."
@@ -42,8 +46,7 @@ export const CreateNewAccount = () => {
             setEmail(event.target.value);
           }}
         />
-        <p className="errorMsg">{emailError}</p>
-
+        <p className="error-msg">{emailError}</p>
         <input
           type="password"
           placeholder="Password..."
@@ -51,9 +54,17 @@ export const CreateNewAccount = () => {
             setPassword(event.target.value);
           }}
         />
-        <p className="errorMsg">{passwordError}</p>
+        <input
+          type="password"
+          placeholder="Repeat the password..."
+          onChange={(event) => {
+            setConfirmPassword(event.target.value);
+          }}
+        />
+        <p className="error-msg">{passwordError}</p>
 
         <button onClick={registerNewAccount}> Create User</button>
+        <Link to="/login">Go Back</Link>
       </div>
 
     );

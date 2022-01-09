@@ -1,11 +1,15 @@
+@import "./utilities/variables/variables";
+
 @import "./utilities/mixins";
 @import "./utilities/base";
 @import "./utilities/error";
 @import "./utilities/pagination";
 
-@import "./layout/navbar";
+@import "./layouts/navbar";
+@import "./layouts/footer";
 
 @import "./pages/landingPage";
 @import "./pages/login";
 @import "./pages/showPostedCode";
 @import "./pages/createNewPost";
+@import "./pages/editPosts";

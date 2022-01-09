@@ -15,7 +15,9 @@ export const ShowPostedCode = (props: ICodeInput) => {
             <style>{props.cssCode}</style>
 
             <div className="code-result-wrapper">
-                <ReactMarkdown rehypePlugins={[rehypeRaw]} children={props?.htmlCode || ""} />
+                <div className="code-container">
+                    <ReactMarkdown rehypePlugins={[rehypeRaw]} children={props?.htmlCode || ""} />
+                </div>
             </div>
         </>
 

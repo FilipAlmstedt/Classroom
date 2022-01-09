@@ -176,39 +176,53 @@ export const EditPost = () => {
     return (
 
         <>
-            <h1>{post?.title}</h1>
+            <div className="edit-post-container">
+                <h1>{post?.title}</h1>
 
-            {allowedToEdit ? <p className="info-msg">You are the owner of this post!</p>: null}
-            {memberAllowedToEdit ? <p className="info-msg">You are a collaborator of this post!</p>: null}
-            
-            {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
-            <form onSubmit={sendEditRequestMail}>
-                <input type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
-                <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                <input type="text" name="link" defaultValue={getURL} hidden/>
-                <input type="text" name="owner" defaultValue={post?.owner} hidden/>
-     
-                {
-                (auth.currentUser && allowedToEdit && !memberAllowedToEdit) || (auth.currentUser && !allowedToEdit && memberAllowedToEdit)?             
-                null
-                : 
-                <div>
-                    <p className="info-msg">If you want to help, send a request to edit code and see if the owner wants help!</p>
-                    <button type="submit">Want to help? Send invite request!</button>
+                {allowedToEdit ? <p className="info-msg">You are the owner of this post!</p>: null}
+                {memberAllowedToEdit ? <p className="info-msg">You are a collaborator of this post!</p>: null}
+                
+                {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
+                <form onSubmit={sendEditRequestMail}>
+                    <input type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
+                    <input type="text" name="post-title" defaultValue={post?.title} hidden/>
+                    <input type="text" name="link" defaultValue={getURL} hidden/>
+                    <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+        
+                    {
+                    (auth.currentUser && allowedToEdit && !memberAllowedToEdit) || (auth.currentUser && !allowedToEdit && memberAllowedToEdit) || !auth.currentUser?             
+                    null
+                    : 
+                    <div>
+                        <p className="info-msg">If you want to help, send a request to edit code and see if the owner wants help!</p>
+                        <button type="submit">Want to help? Send invite request!</button>
+                    </div>
+                    }
+
+                </form>
+                <p className="error-msg">{error}</p>
+                <p className="success-msg">{successMsg}</p>
+
+                <div className="desc">
+                    <p>Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by {post?.owner}</p>
+                    <p>{post?.description}</p>
                 </div>
-                }
 
-            </form>
-            <p className="error-msg">{error}</p>
-            <p className="success-msg">{successMsg}</p>
-
-            <div className="desc">
-                <p>Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by {post?.owner}</p>
-                <p>{post?.description}</p>
-            </div>
-
-            <div className="coding-input-container">
-                {(allowedToEdit || memberAllowedToEdit) ? <CodeEditor 
+                <div className="coding-input-container">
+                    {(allowedToEdit || memberAllowedToEdit) ? <CodeEditor 
+                        className="code-editor"
+                        value={newHtml}
+                        language="html"
+                        onChange={(evn) => setNewhtml(evn.target.value)}
+                        padding={15}
+                        style={{
+                            fontSize: 12,
+                            backgroundColor: "#f5f5f5",
+                            overflow: "scroll",
+                            // height: 300,
+                            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace'
+                        }}
+                    /> : <CodeEditor disabled
                     className="code-editor"
                     value={newHtml}
                     language="html"
@@ -219,83 +233,66 @@ export const EditPost = () => {
                         backgroundColor: "#f5f5f5",
                         overflow: "scroll",
                         // height: 300,
-                        border: "1px solid black",
-                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace'
-                    }}
-                /> : <CodeEditor disabled
-                className="code-editor"
-                value={newHtml}
-                language="html"
-                onChange={(evn) => setNewhtml(evn.target.value)}
-                padding={15}
-                style={{
-                    fontSize: 12,
-                    backgroundColor: "#f5f5f5",
-                    overflow: "scroll",
-                    // height: 300,
-                    border: "1px solid black",
-                    fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                    opacity: 0.3
-                }} 
-                />}
-
-                {(allowedToEdit || memberAllowedToEdit) ? <CodeEditor
-                    className="code-editor"
-                    value={newCss}
-                    language="sass"
-                    onChange={(evn) => setNewCss(evn.target.value)}
-                    padding={15}
-                    style={{
-                        fontSize: 12,
-                        overflow: "scroll",
-                        // height: 300,
-                        border: "1px solid black",
-                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                    }}
-                /> : 
-                    <CodeEditor disabled
-                    className="code-editor"
-                    value={newCss}
-                    language="sass"
-                    onChange={(evn) => setNewCss(evn.target.value)}
-                    padding={15}
-                    style={{
-                        fontSize: 12,
-                        overflow: "scroll",
-                        // height: 300,
-                        border: "1px solid black",
                         fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
                         opacity: 0.3
-                    }}
-                />}
+                    }} 
+                    />}
+
+                    {(allowedToEdit || memberAllowedToEdit) ? <CodeEditor
+                        className="code-editor"
+                        value={newCss}
+                        language="sass"
+                        onChange={(evn) => setNewCss(evn.target.value)}
+                        padding={15}
+                        style={{
+                            fontSize: 12,
+                            overflow: "scroll",
+                            // height: 300,
+                            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                        }}
+                    /> : 
+                        <CodeEditor disabled
+                        className="code-editor"
+                        value={newCss}
+                        language="sass"
+                        onChange={(evn) => setNewCss(evn.target.value)}
+                        padding={15}
+                        style={{
+                            fontSize: 12,
+                            overflow: "scroll",
+                            // height: 300,
+                            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                            opacity: 0.3
+                        }}
+                    />}
+                </div>
+
+                {/* 
+                This form is for sending an email with the info that a collaborator/member 
+                has updated/changed the code  
+                */}
+                <form onSubmit={sendCollaboratorEditMail}>
+
+                    <input type="text" name="collaborator" defaultValue={auth.currentUser?.email?.toString()} hidden/>
+                    <input type="text" name="post-title" defaultValue={post?.title} hidden/>
+                    <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+                    <input type="text" name="link" defaultValue={getURL} hidden/>
+
+                    {allowedToEdit || memberAllowedToEdit
+                    ? 
+                    <div>
+                        <button type="submit">Update</button>
+                        <p className="success-msg">{successfulUpdateMsg}</p>
+                        <p className="success-msg">{collaboratorEditMsg}</p>
+                    </div> 
+                    : 
+                    <div>
+                        <button disabled>Update</button>
+                    </div>}
+                </form>
+                    
+                <div className="result-frame"><ShowPostedCode htmlCode={newHtml} cssCode={newCss}/></div>
             </div>
-
-            {/* 
-            This form is for sending an email with the info that a collaborator/member 
-            has updated/changed the code  
-            */}
-            <form onSubmit={sendCollaboratorEditMail}>
-
-                <input type="text" name="collaborator" defaultValue={auth.currentUser?.email?.toString()} hidden/>
-                <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                <input type="text" name="owner" defaultValue={post?.owner} hidden/>
-                <input type="text" name="link" defaultValue={getURL} hidden/>
-
-                {allowedToEdit || memberAllowedToEdit
-                ? 
-                <div>
-                    <button type="submit">Update</button>
-                    <p className="success-msg">{successfulUpdateMsg}</p>
-                    <p className="success-msg">{collaboratorEditMsg}</p>
-                </div> 
-                : 
-                <div>
-                    <button disabled>Update</button>
-                </div>}
-            </form>
-                
-            <div className="result-frame"><ShowPostedCode htmlCode={newHtml} cssCode={newCss}/></div>
-
             
         </>
 

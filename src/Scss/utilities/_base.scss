@@ -2,6 +2,14 @@
     padding: 0;
     margin: 0;
 }
+body {
+    height: 100vh;
+    width: 100%;
+}
 .App {
+    @include flexStyling(column, space-between);
+    overflow-x: hidden;
+}
+.base-wrapper {
     height: 100vh;
 }

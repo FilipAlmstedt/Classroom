@@ -28,33 +28,34 @@ export const Login = () => {
 
     return (
 
-        <>
-            <div className="login-container">
-                <h1>This is the login page!</h1>
+        <>  
+            
+                <div className="login-container">
+                    <h1>This is the login page!</h1>
 
-                <input
-                    type="text"
-                    placeholder="Email..."
-                    onChange={(event) => {
-                    setEmail(event.target.value);
-                    }}
-                />
-                <p className="error-msg">{emailError}</p>
+                    <input
+                        type="text"
+                        placeholder="Email..."
+                        onChange={(event) => {
+                        setEmail(event.target.value);
+                        }}
+                    />
+                    <p className="error-msg">{emailError}</p>
 
-                <input
-                    type="password"
-                    placeholder="Password..."
-                    onChange={(event) => {
-                    setPassword(event.target.value);
-                    }}
-                />
-                <p className="error-msg">{passwordError}</p>
+                    <input
+                        type="password"
+                        placeholder="Password..."
+                        onChange={(event) => {
+                        setPassword(event.target.value);
+                        }}
+                    />
+                    <p className="error-msg">{passwordError}</p>
 
-                <button onClick={login}> Login</button>
+                    <button onClick={login}> Login</button>
 
-                <Link to="/register">Haven't got an account? Register here!</Link>
-                <Link to="/forgot">Forgot your password?</Link>
-            </div>
+                    <Link to="/register">Haven't got an account? Register here!</Link>
+                    <Link to="/forgot">Forgot your password?</Link>
+                </div>
         </>
     );
 }
