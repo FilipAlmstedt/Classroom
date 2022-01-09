@@ -2,18 +2,32 @@ header {
     min-height: 15vh;
     background-color: black;
     color: white;
-
+    a {
+        color: white;
+        text-decoration: none;
+    }
 
     @include flexStyling(column, center);
 
+    
     @include desktopsOnly() {
         @include flexStyling(row, space-between);
         .header-title {
-            margin-left: 30%;
+            margin-left: 2%;
         }
     }   
 
-    
+    .logo-container {
+        @include flexStyling(row, center);
+        
+        .logo {
+            background: url(../assets/icons/company_logo.png);
+            background-position: center;
+            background-size: cover;
+            width: 90px;
+            height: 90px;
+        }
+    }
 
     ul {
 
@@ -24,7 +38,6 @@ header {
         @include desktopsOnly() {
             @include flexStyling(row, center);
         }   
-
        
         list-style: none;
         li {

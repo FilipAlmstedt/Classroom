@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react";
 
+
 export const Navbar = () => {
     
     const navigate = useNavigate();
@@ -31,13 +32,20 @@ export const Navbar = () => {
     return (
         <>
             <header>
-                <Link to="/"><h2 className="header-title">Classroom</h2></Link>
+                <Link to="/">
+                    <div className="logo-container">
+                        <div className="logo"></div>
+                        <h2 className="header-title"> 
+                            Classroom 
+                        </h2>
+                    </div>
+                </Link>
                 <nav>
                     <ul>
-                        {checkUserLoggedIn ? <p>Welcome {auth.currentUser?.email}</p>: null}
+                        {checkUserLoggedIn ? <p>Current User: {auth.currentUser?.email}</p>: null}
                         <li><Link to="/show-posts">Show Posts</Link></li>
                         {checkUserLoggedIn ? <li><Link to="/create-new-post">Create new Post</Link></li>: null}
-                        {checkUserLoggedIn ? <div onClick={logout}><li><Link to="">Log out</Link></li></div>: <Link to="/login"><li>Log in</li></Link>}
+                        {checkUserLoggedIn ? <div onClick={logout}><li><Link to="">Log out</Link></li></div>: <li><Link to="/login">Log in</Link></li>}
                     </ul>
                 </nav>
             </header>
