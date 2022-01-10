@@ -22,12 +22,12 @@
     @include desktopsOnly() {
 
         .desc-and-code-container {
-
             @include flexStyling(row, center);
             width: $full-width;
             .textarea-desc {
                 width: 33%;
-                height: 300px
+                height: 100%;
+                height: 300px;
             }
 
             .coding-input-container {
@@ -39,6 +39,8 @@
 
     .code-editor {
         width: $full-width;
-        overflow-x: hidden;
+        position: relative;
+        height: 300px;
+        overflow: auto;
     }
 }

@@ -47,35 +47,39 @@ export const CreateNewPost = () => {
                         <textarea className="textarea-desc" onChange={(evn) => setDesc(evn.target.value)} placeholder="Type in what the problem is..." id=""></textarea>
 
                         <div className="coding-input-container">
-                            <CodeEditor 
-                                className="code-editor"
-                                value={htmlCode}
-                                language="html"
-                                onChange={(evn) => setHtmlCode(evn.target.value)}
-                                padding={15}
-                                style={{
-                                    fontSize: 12,
-                                    backgroundColor: "#f5f5f5",
-                                    overflow: "scroll",
-                                    height: 300,
-                                    fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                                }}
-                                
-                            />
+                            <div className="code-editor">
+                                <CodeEditor 
+                                    className="hej"
+                                    value={htmlCode}
+                                    language="html"
+                                    onChange={(evn) => setHtmlCode(evn.target.value)}
+                                    padding={15}
+                                    style={{
+                                        fontSize: 14,
+                                        overflow: "hidden",
+                                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                                        position: "relative",
+                                    }}
+                                    
+                                />
+                            </div>
 
-                            <CodeEditor
-                                className="code-editor"
-                                value={cssCode}
-                                language="sass"
-                                onChange={(evn) => setCssCode(evn.target.value)}
-                                padding={15}
-                                style={{
-                                    fontSize: 12,
-                                    overflow: "scroll",
-                                    height: 300,
-                                    fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                                }}
-                            />
+                            <div className="code-editor">
+                                <CodeEditor
+                                    className="hej"
+                                    value={cssCode}
+                                    language="sass"
+                                    onChange={(evn) => setCssCode(evn.target.value)}
+                                    padding={15}
+                                    style={{
+                                        fontSize: 14,
+                                        overflow: "hidden",
+                                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
+                                        position: "relative",
+                                        
+                                    }}
+                                />
+                            </div>
                         </div>
                     </div>
                     <button onClick={createNewPost}>Post!</button>
