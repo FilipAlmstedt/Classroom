@@ -1,25 +1,45 @@
-import CodeEditor from '@uiw/react-textarea-code-editor';
+import AceEditor from "react-ace";
 import { useState } from 'react';
 import { ShowPostedCode } from '../ShowPostedCode';
 import { addDoc, collection } from 'firebase/firestore';
 import { auth, db } from '../../firebase';
 import { useNavigate } from 'react-router-dom';
 
+// ? Imported these to not get error messages in web browser console
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/webpack-resolver";
+
+// ! Imported these for choosing mode and themes for code-editors
+import "ace-builds/src-noconflict/theme-dracula";
+import "ace-builds/src-noconflict/mode-html";
+import "ace-builds/src-noconflict/mode-css";
+
+
+
+
 export const CreateNewPost = () => {
+    const navigate = useNavigate();
 
     const postsCollectionRef = collection(db, "post");
 
     const [desc, setDesc] = useState("");
     const [title, setTitle] = useState("");
     const [htmlCode, setHtmlCode] = useState(
-        `<!--Insert your HTML code here-->`
+        "<!--Insert your HTML code here-->\n<h1>The results will appear here!</h1>"
     );
     const [cssCode, setCssCode] = useState(
         `/*Insert your CSS code here*/`
-    ); 
-    
-    const navigate = useNavigate();
+    );
+  
+    // Functions to store code in states
+    const updateCssCode = (newCode: string) =>  {
+        setCssCode(newCode);
+    }
+    const updateHtmlCode = (newCode: string) =>  {
+        setHtmlCode(newCode);
+    }
 
+    // Create new post with stored states
     const createNewPost = async () => {
         
         await addDoc(postsCollectionRef, {desc: desc , title: title, comments: [], css: cssCode, html: htmlCode, projectOwner: auth.currentUser?.email, members: [], date: Date.now(), pendingCollaborators: []}).catch((err) => {
@@ -28,64 +48,70 @@ export const CreateNewPost = () => {
         
         navigate("/");
     }
-
+    
     return (
         <>  
             <div className="create-new-post-container">
-                <h1>Create a new Post here!</h1>
+                <h1 className="app-h1">Create a new Post here!</h1>
                 
-                    <div className="title-input">
-                        <label htmlFor="title">Title:</label>
-                        <input id="title" 
-                            placeholder="Name the title of your problem" 
-                            type="text" 
-                            onChange={(evn) => setTitle(evn.target.value)}
-                        />
+                <div className="title-input">
+                    <label className="app-label" htmlFor="title">Title:</label>
+                    <input className="app-input" id="title" 
+                        placeholder="Name the title of your problem" 
+                        type="text" 
+                        onChange={(evn) => setTitle(evn.target.value)}
+                    />
+                </div>
+
+                <div className="desc-and-code-container">
+                    <div className="textarea-desc">
+                        <label className="app-label" htmlFor="desc"><h2>Description:</h2></label>
+                        <textarea className="app-textarea" name="desc" onChange={(evn) => setDesc(evn.target.value)} placeholder="Type in what the problem is..." id=""></textarea>
                     </div>
 
-                    <div className="desc-and-code-container">
-                        <textarea className="textarea-desc" onChange={(evn) => setDesc(evn.target.value)} placeholder="Type in what the problem is..." id=""></textarea>
-
-                        <div className="coding-input-container">
-                            <div className="code-editor">
-                                <CodeEditor 
-                                    className="hej"
-                                    value={htmlCode}
-                                    language="html"
-                                    onChange={(evn) => setHtmlCode(evn.target.value)}
-                                    padding={15}
-                                    style={{
-                                        fontSize: 14,
-                                        overflow: "hidden",
-                                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                                        position: "relative",
-                                    }}
-                                    
-                                />
-                            </div>
-
-                            <div className="code-editor">
-                                <CodeEditor
-                                    className="hej"
-                                    value={cssCode}
-                                    language="sass"
-                                    onChange={(evn) => setCssCode(evn.target.value)}
-                                    padding={15}
-                                    style={{
-                                        fontSize: 14,
-                                        overflow: "hidden",
-                                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                                        position: "relative",
-                                        
-                                    }}
-                                />
-                            </div>
+                        <div className="code-editor">
+                            <label className="app-label" htmlFor="html">
+                                <h2 className="app-h2">HTML:</h2>
+                            </label>
+                            <AceEditor
+                                mode={"html"}
+                                theme="dracula"
+                                value={htmlCode}
+                                onChange={updateHtmlCode}
+                                name="html"
+                                width='100%'
+                                height='300px'
+                                className="ace-editor" 
+                                fontSize={"15px"}        
+                            />
                         </div>
-                    </div>
-                    <button onClick={createNewPost}>Post!</button>
 
-                <div className="result-frame"><ShowPostedCode htmlCode={htmlCode} cssCode={cssCode}/></div>
-                
+                        <div className="code-editor">
+                            <label className="app-label" htmlFor="css"><h2>CSS:</h2></label>
+                            <AceEditor
+                                mode={"css"}
+                                theme="dracula"
+                                value={cssCode}
+                                onChange={updateCssCode}
+                                name="css"
+                                width='100%'
+                                height='300px'
+                                className="ace-editor"
+                                fontSize={"15px"}   
+                            />
+                        </div>
+                    
+                </div>
+
+               
+                <button className="create-new-post-btn" onClick={createNewPost}>Post!</button>
+              
+
+            </div>
+            <div className="result-frame-container">
+                    <div className="result-frame">
+                        <ShowPostedCode htmlCode={htmlCode} cssCode={cssCode}/>
+                    </div>
             </div>
         </>
     );

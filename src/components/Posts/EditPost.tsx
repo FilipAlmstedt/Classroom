@@ -4,9 +4,19 @@ import { Post } from "../../Models/Post";
 import { doc, DocumentData, DocumentSnapshot, getDoc, setDoc  } from "firebase/firestore";
 import { auth, db } from '../../firebase';
 import { ShowPostedCode } from "../ShowPostedCode";
-import CodeEditor from '@uiw/react-textarea-code-editor';
+
 import emailjs from '@emailjs/browser';
 import config  from '../../config/config';
+import AceEditor from "react-ace";
+
+// ? Imported these to not get error messages in web browser console
+import "ace-builds/src-noconflict/mode-json";
+import "ace-builds/webpack-resolver";
+
+// ! Imported these for choosing mode and themes for code-editors
+import "ace-builds/src-noconflict/theme-dracula";
+import "ace-builds/src-noconflict/mode-html";
+import "ace-builds/src-noconflict/mode-css";
 
 // Collect id - booking reference from URL
 type Params = {
@@ -15,11 +25,11 @@ type Params = {
 export const EditPost = () => {
 
     let { id } = useParams<Params>();
-    const getURL = "http://localhost:3000/accept-or-decline/"+id;
+    const getURL = "http://localhost:3000/edit-post/"+id;
     
     
     const [post, setPost] = useState<Post>();
-    const [newHtml, setNewhtml] = useState("");
+    const [newHtml, setNewHtml] = useState("");
     const [newCss, setNewCss] = useState("");
     const [allowedToEdit, setAllowedToEdit] = useState(false);
     const [memberAllowedToEdit, setMemberAllowedToEdit] = useState(false);
@@ -114,7 +124,7 @@ export const EditPost = () => {
             docSnap.data()?.pendingCollaborators
         ); 
 
-        setNewhtml(collectedPost.html);
+        setNewHtml(collectedPost.html);
         setNewCss(collectedPost.css);
         
         checkIfEdit(docSnap.data()?.projectOwner, collectedPost);
@@ -151,6 +161,13 @@ export const EditPost = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
+    // Functions to store code in states
+    const updateCssCode = (newCssCode: string) =>  {
+        setNewCss(newCssCode);
+    }
+    const updateHtmlCode = (newHtmlCode: string) =>  {
+        setNewHtml(newHtmlCode);
+    }
 
     const updateCode = async () => {
    
@@ -177,121 +194,138 @@ export const EditPost = () => {
 
         <>
             <div className="edit-post-container">
-                <h1>{post?.title}</h1>
+                <h1 className="app-h1">{post?.title}</h1>
+                <p className="app-p">Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by {post?.owner}</p>
 
-                {allowedToEdit ? <p className="info-msg">You are the owner of this post!</p>: null}
-                {memberAllowedToEdit ? <p className="info-msg">You are a collaborator of this post!</p>: null}
+                {allowedToEdit ? <p className="info-msg app-p">You are the owner of this post!</p>: null}
+                {memberAllowedToEdit ? <p className="info-msg app-p">You are a collaborator of this post!</p>: null}
                 
                 {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
                 <form onSubmit={sendEditRequestMail}>
-                    <input type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
-                    <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                    <input type="text" name="link" defaultValue={getURL} hidden/>
-                    <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+                    <input className="app-input" type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
+                    <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
+                    <input className="app-input" type="text" name="link" defaultValue={getURL} hidden/>
+                    <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
         
                     {
                     (auth.currentUser && allowedToEdit && !memberAllowedToEdit) || (auth.currentUser && !allowedToEdit && memberAllowedToEdit) || !auth.currentUser?             
                     null
                     : 
-                    <div>
-                        <p className="info-msg">If you want to help, send a request to edit code and see if the owner wants help!</p>
+                    <div className="app-div">
+                        <p className="info-msg app-p">If you want to help, send a request to edit code and see if the owner wants help!</p>
                         <button type="submit">Want to help? Send invite request!</button>
                     </div>
                     }
-
                 </form>
+        
                 <p className="error-msg">{error}</p>
                 <p className="success-msg">{successMsg}</p>
 
-                <div className="desc">
-                    <p>Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by {post?.owner}</p>
-                    <p>{post?.description}</p>
-                </div>
+                <div className="desc-and-code-container">
+                    <div className="desc">
+                        <p className="app-p">{post?.description}</p>
+                    </div>
 
-                <div className="coding-input-container">
-                    {(allowedToEdit || memberAllowedToEdit) ? <CodeEditor 
-                        className="code-editor"
-                        value={newHtml}
-                        language="html"
-                        onChange={(evn) => setNewhtml(evn.target.value)}
-                        padding={15}
-                        style={{
-                            fontSize: 12,
-                            backgroundColor: "#f5f5f5",
-                            overflow: "scroll",
-                            // height: 300,
-                            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace'
-                        }}
-                    /> : <CodeEditor disabled
-                    className="code-editor"
-                    value={newHtml}
-                    language="html"
-                    onChange={(evn) => setNewhtml(evn.target.value)}
-                    padding={15}
-                    style={{
-                        fontSize: 12,
-                        backgroundColor: "#f5f5f5",
-                        overflow: "scroll",
-                        // height: 300,
-                        fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                        opacity: 0.3
-                    }} 
-                    />}
-
-                    {(allowedToEdit || memberAllowedToEdit) ? <CodeEditor
-                        className="code-editor"
-                        value={newCss}
-                        language="sass"
-                        onChange={(evn) => setNewCss(evn.target.value)}
-                        padding={15}
-                        style={{
-                            fontSize: 12,
-                            overflow: "scroll",
-                            // height: 300,
-                            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                        }}
-                    /> : 
-                        <CodeEditor disabled
-                        className="code-editor"
-                        value={newCss}
-                        language="sass"
-                        onChange={(evn) => setNewCss(evn.target.value)}
-                        padding={15}
-                        style={{
-                            fontSize: 12,
-                            overflow: "scroll",
-                            // height: 300,
-                            fontFamily: 'ui-monospace,SFMono-Regular,SF Mono,Consolas,Liberation Mono,Menlo,monospace',
-                            opacity: 0.3
-                        }}
-                    />}
-                </div>
-
-                {/* 
-                This form is for sending an email with the info that a collaborator/member 
-                has updated/changed the code  
-                */}
-                <form onSubmit={sendCollaboratorEditMail}>
-
-                    <input type="text" name="collaborator" defaultValue={auth.currentUser?.email?.toString()} hidden/>
-                    <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                    <input type="text" name="owner" defaultValue={post?.owner} hidden/>
-                    <input type="text" name="link" defaultValue={getURL} hidden/>
-
-                    {allowedToEdit || memberAllowedToEdit
-                    ? 
-                    <div>
-                        <button type="submit">Update</button>
-                        <p className="success-msg">{successfulUpdateMsg}</p>
-                        <p className="success-msg">{collaboratorEditMsg}</p>
-                    </div> 
-                    : 
-                    <div>
-                        <button disabled>Update</button>
-                    </div>}
-                </form>
                     
-                <div className="result-frame"><ShowPostedCode htmlCode={newHtml} cssCode={newCss}/></div>
+                    {(allowedToEdit || memberAllowedToEdit) ? 
+                    <div className="code-editor">
+                        <label className="app-label" htmlFor="html"><h2 className="app-h2">HTML:</h2></label>
+                        <AceEditor
+                            mode={"html"}
+                            theme="dracula"
+                            value={newHtml}
+                            onChange={updateHtmlCode}
+                            name="html"
+                            width='100%'
+                            height='300px'
+                            className="ace-editor"     
+                            fontSize={"15px"}    
+                        />
+                    </div>
+                    : 
+                    <div className="code-editor">
+                        <label className="app-label" htmlFor="html"><h2 className="app-h2">HTML:</h2></label>
+                        <AceEditor 
+                            mode={"html"}
+                            theme="dracula"
+                            value={newHtml}
+                            onChange={updateHtmlCode}
+                            name="html"
+                            width='100%'
+                            height='300px'
+                            className="ace-editor-edit-disabled ace-editor"   
+                            readOnly
+                            fontSize={"15px"}
+                        />
+                    </div>}
+
+                    {(allowedToEdit || memberAllowedToEdit) ?
+                    <div className="code-editor"> 
+                        <label className="app-label" htmlFor="css"><h2 className="app-h2">CSS:</h2></label>
+                        <AceEditor 
+                            mode={"css"}
+                            theme="dracula"
+                            value={newCss}
+                            onChange={updateCssCode}
+                            name="css"
+                            width='100%'
+                            height='300px'
+                            className="ace-editor"   
+                            fontSize={"15px"}
+                        />
+                    </div>
+                    : 
+                    <div className="code-editor"> 
+                        <label className="app-label" htmlFor="css"><h2 className="app-h2">CSS:</h2></label>
+                        <AceEditor 
+                            mode={"css"}
+                            theme="dracula"
+                            value={newCss}
+                            onChange={updateCssCode}
+                            name="css"
+                            width='100%'
+                            height='300px'
+                            className="ace-editor-edit-disabled ace-editor"   
+                            readOnly
+                            fontSize={"15px"}
+                        />
+                    </div>}
+                </div>
+
+                <div className="update-btn-container">
+
+                    {/* 
+                    This form is for sending an email with the info that a collaborator/member 
+                    has updated/changed the code  
+                    */}
+                    <form onSubmit={sendCollaboratorEditMail}>
+
+                        <input className="app-input" type="text" name="collaborator" defaultValue={auth.currentUser?.email?.toString()} hidden/>
+                        <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
+                        <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
+                        <input className="app-input" type="text" name="link" defaultValue={getURL} hidden/>
+
+                        {allowedToEdit || memberAllowedToEdit
+                        ? 
+                        <div className="app-div">
+                            <button className="update-btn" type="submit">Update</button>
+                            <p className="success-msg app-p">{successfulUpdateMsg}</p>
+                            <p className="success-msg app-p">{collaboratorEditMsg}</p>
+                        </div> 
+                        : 
+                        <div className="app-div">
+                            <button className="update-btn" disabled>Update</button>
+                        </div>}
+                    </form>
+                </div>   
+
+
+
+                <div className="result-frame-container">
+                    <div className="result-frame">
+                        <ShowPostedCode htmlCode={newHtml} cssCode={newCss}/>
+                    </div>
+                </div>
             </div>
             
         </>

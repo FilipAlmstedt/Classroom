@@ -51,13 +51,14 @@ export const LandingPage = () => {
     return (
         <>
             <div className="landing-page-container">
-                <h1>This is the LANDING PAGE</h1>
-                <h1>Recent Posts:</h1>
+                <h1 className="app-h1">This is the LANDING PAGE</h1>
+                <h1 className="app-h1">Recent Posts:</h1>
                 {posts.map((post) => {
                     return(
-                        <div key={post.id}>
-                            <Link to={`/edit-post/${post.id}`}><h2>{post.title}</h2></Link>
-                            <h3>{new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)}</h3>
+                        <div className="post-div" key={post.id}>
+                            <Link to={`/edit-post/${post.id}`}><h2 className="app-h2">{post.title}</h2></Link>
+                            <h3 className="app-h3">{new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)}</h3>
+                            <p className="app-p">Created by: {post.owner}</p>
                         </div>
                     );     
                 })}

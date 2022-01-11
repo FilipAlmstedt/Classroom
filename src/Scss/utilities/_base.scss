@@ -13,3 +13,31 @@ body {
 .base-wrapper {
     height: 100vh;
 }
+
+// ! IMPORTANT
+/* 
+These are base elements needs their own classes because users might 
+style their own on a component and if they style a normal element 
+without a class it will spread to other elements on the app so 
+these will prevent it.
+*/
+
+.app-h1 {
+
+}
+.app-h1 {
+
+}
+.app-h3 {
+
+}
+.app-h4 {
+
+}
+// Paragraph
+.app-p {
+
+}
+.app-input {
+
+}

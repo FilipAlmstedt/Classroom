@@ -11,6 +11,7 @@ import { CreateNewPost } from "./components/Posts/CreateNewPost";
 import { EditPost } from "./components/Posts/EditPost";
 import { AcceptOrDecline } from "./components/Posts/AcceptOrDecline";
 import { ShowPosts } from "./components/Posts/ShowPosts";
+import { PageNotFound } from "./components/PageNotFound";
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
             <Route path="/show-posts" element={<ShowPosts/>} />
             <Route path="/edit-post/:id" element={<EditPost/>} /> 
             <Route path="/accept-or-decline/:id" element={<AcceptOrDecline/>} />
+            <Route path="*" element={<PageNotFound/>}/>
 
           </Routes>
 

@@ -1,13 +1,20 @@
-.result-frame {
+.result-frame-container {
+    @include flexStyling(column, center);
+    height: 600px;
     margin-top: 1%;
     width: $full-width;
-    height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-   
-    overflow-y: scroll;
+    margin-bottom: 1%;
+    .result-frame {
+        
+        height: $full-height;
+        width: 98%;
+        border: 5px solid black;
+    
+        overflow-y: scroll;
+        border-radius: 10px;
+    }
 }
+
 .code-result-wrapper {
     height: $full-height;
     width: $full-width;

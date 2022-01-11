@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { db } from '../../firebase';
-import { collection, query, orderBy, startAfter, limit, getDocs, QuerySnapshot, DocumentData } from "firebase/firestore";  
+import { collection, query, orderBy, getDocs, QuerySnapshot, DocumentData } from "firebase/firestore";  
 import { Post } from '../../Models/Post';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
@@ -14,7 +14,7 @@ export const ShowPosts = () => {
 
     // Custom Pagination with pages
     const [pageNumber, setPageNumber] = useState(0);
-    const postsPerPage = 1;
+    const postsPerPage = 5;
     const pagesVisited = pageNumber*postsPerPage;
     const pageCount = Math.ceil(posts.length/postsPerPage);
     
@@ -55,10 +55,10 @@ export const ShowPosts = () => {
     const displayPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
         return(
-            <div key={post.id}>
-                <Link to={`/edit-post/${post.id}`}><h2>{post.title}</h2></Link>
-                <h3>{new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)}</h3>
-                <p>Created by: {post.owner}</p>
+            <div className="post-div" key={post.id}>
+                <Link to={`/edit-post/${post.id}`}><h2 className="app-h2">{post.title}</h2></Link>
+                <h3 className="app-h3">{new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)}</h3>
+                <p className="app-p">Created by: {post.owner}</p>
             </div>
         );     
     })
@@ -77,8 +77,8 @@ export const ShowPosts = () => {
     return (
         <>
             {!loading ?<div className="landing-page-container">
-                <h1>Look at the problems people have:</h1>
-                <h1>Posts:</h1>
+                <h1 className="app-h1">Look at the problems people have:</h1>
+                <h1 className="app-h1">Posts:</h1>
                 {displayPosts}
                 
 
@@ -93,7 +93,7 @@ export const ShowPosts = () => {
                     disabledClassName={"pagniation-disabled"}
                     activeClassName={"pagination-active"}
                 />
-            </div>: <h1>Loading...</h1>}
+            </div>: <h1 className="app-h1">Loading...</h1>}
         </>
     );
 }
