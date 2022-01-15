@@ -9,7 +9,11 @@
 @import "./layouts/footer";
 
 @import "./pages/landingPage";
-@import "./pages/login";
-@import "./pages/createNewPost";
-@import "./pages/editPosts";
+@import "./pages/authentication/login";
+@import "./pages/authentication/createNewAccount";
+@import "./pages/authentication/forgotPassword";
+@import "./pages/authentication/resetPassword";
+@import "./pages/posts/createNewPost";
+@import "./pages/posts/editPosts";
+@import "./pages/posts/acceptOrDecline";
 @import "./pages/showPostedCode";

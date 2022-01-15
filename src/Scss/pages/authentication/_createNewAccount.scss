@@ -1,0 +1,97 @@
+.create-new-user-container {
+
+    @include flexStyling(column, center, stretch);
+    height: 80vh; 
+    width: 80%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    
+    .create-user-h1 {
+        color: #000;
+    }
+    .new-user-image-container {
+        width: $full-width;
+        height: 300px;
+        position: relative;
+
+        @include flexStyling(column, space-evenly, center);
+        .new-user-info-text { 
+            position: relative;
+        }
+
+    }
+    .new-user-image-container::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-image: url(../../assets/images/safar-safarov-koOdUvfGr4c-unsplash.jpg);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+        border-radius: 20px 20px 0px 0px; 
+    }
+    .inputs-container {
+        width: $full-width;
+        background-color: #FFF;
+        @include flexStyling(column, center, center);
+
+        .input-email, .input-password, .input-repeat-password {
+            @include flexStyling(column, flex-start, flex-start);
+            width: 80%;
+            margin-top: 5%;
+            margin-bottom: 5%;
+
+            .new-user-label {
+                color: #000;
+                font-size: 25px;
+                font-weight: bold;
+            }
+        }
+    }
+    .register-btn-container {
+        width: 50%;
+        @include flexStyling(column, center, center);    
+        .register-user-btn {
+            cursor: pointer;
+            width: $full-width;
+            height: 50px;
+            background-color: #47CF73;
+            border: none;
+            font-size: 17px;
+            border-radius: 10px;
+        }
+    }
+
+    .go-back {
+        margin-bottom: 10%;
+    }   
+}
+
+@include desktopsOnly() {
+    .create-new-user-container {
+        @include flexStyling(row, center, stretch);    
+
+        .new-user-image-container {
+            width: 50%;
+            height: $full-height;
+        }
+        .new-user-image-container::before {
+            border-radius: 20px 0px 0px 20px;
+        }
+        .inputs-container {
+            width: 50%;
+            height: $full-height;
+            border-radius: 0px 20px 20px 0px;
+
+            .input-email, .input-password, .input-repeat-password {
+                width: 50%;
+            }
+        }
+        .register-user-btn {
+            width: $full-width;
+        }
+    }
+}

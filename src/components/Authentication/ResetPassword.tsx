@@ -46,30 +46,53 @@ export const ResetPassword = () => {
 
     return (
         <>
-            <h1>Reset Password</h1>
+            <div className="reset-password-container">
+                
+                
+                <div className="inputs-container">
 
-            <input
-                type="password"
-                value={newPassword}
-                placeholder="Type in your new password"
-                onChange={(event) => {
-                    setNewPassword(event.target.value);
-                }}
-            />
-            <input
-                type="password"
-                value={confirmNewPassword}
-                placeholder="Confirm your new passoword"
-                onChange={(event) => {
-                    setConfirmNewPassword(event.target.value);
-                }}
-            />
+                    <div className="unlocked-icon"></div>
+                    <h1 className="app-h1 reset-h1">Reset Password</h1>
+                    
 
-            <p className="error-msg">{errorMessage}</p>
-            <p className="error-msg">{passwordNotMatched}</p>
-            {expiredTime ? <p className="error-msg">Time has expired! <Link to="/forgot">Go back</Link></p>: null}
+                    <div className="password-input">
+                        <label className="app-label reset-label" htmlFor="password">Password:</label>
+                        <input
+                            id="password"
+                            className="app-input"
+                            type="password"
+                            value={newPassword}
+                            placeholder="Type in your new password"
+                            onChange={(event) => {
+                                setNewPassword(event.target.value);
+                            }}
+                        />
+                    </div>
+                        
+                    <div className="repeat-password-input">
+                        <label className="app-label reset-label" htmlFor="repeat-password">Repeat Password:</label>
+                        <input
+                            id="repeat-password"
+                            className="app-input"
+                            type="password"
+                            value={confirmNewPassword}
+                            placeholder="Confirm your new passoword"
+                            onChange={(event) => {
+                                setConfirmNewPassword(event.target.value);
+                            }}
+                        />
+                    <p className="error-msg">{errorMessage}</p>
+                    <p className="error-msg">{passwordNotMatched}</p>
+                    {expiredTime ? <p className="error-msg">Time has expired! <Link to="/forgot">Go back</Link></p>: null}
+                    </div>
 
-            <button onClick={resetPassword}>Reset Password</button>
+
+
+                    <button className="reset-password-btn" onClick={resetPassword}>Reset Password</button>
+                </div>
+
+
+            </div>
         </>
     );
 }

@@ -6,9 +6,9 @@
 }
 
 //Created to recyle flex-styling, arguments for direction and justify-content
-@mixin flexStyling($direction, $justifyContent) {
+@mixin flexStyling($direction, $justifyContent, $alignItems) {
     display: flex;
     flex-direction: $direction;
     justify-content: $justifyContent;
-    align-items: center;
+    align-items: $alignItems;
 }

@@ -25,7 +25,7 @@ export const AcceptOrDecline = () => {
                 post?.members.push(incomingMember);
                 setPost(post);
 
-                setAcceptHelp("You have approved help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + " This account has now access to edit your code. You can now please close this window!")
+                setAcceptHelp("You have approved help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + ". This account has now access to edit your code. You can now please close this window!")
                 post?.pendingCollaborators.pop();
                 updateDoc();
                 
@@ -39,7 +39,7 @@ export const AcceptOrDecline = () => {
     
         emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdInviteDeclined || "", e.target, config.emailJSConfig.userId)
           .then(() => {
-                setDeclineHelp("You have declined help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + " You can now please close this window!");
+                setDeclineHelp("You have declined help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + ". You can now please close this window!");
                 setPost(post);
                 post?.pendingCollaborators.pop();
                 updateDoc();
@@ -95,31 +95,47 @@ export const AcceptOrDecline = () => {
     return (
 
         <>
-            <h1>{post?.pendingCollaborators[post.pendingCollaborators.length-1]}</h1>
-                <div className="accept-or-decline-btns">     
-                    {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
-                    <form onSubmit={sendEmailAccept}>
-                        <input type="text" name="collaborator" defaultValue={post?.pendingCollaborators[post.pendingCollaborators.length-1]} hidden/>
-                        <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                        <input type="text" name="owner" defaultValue={post?.owner} hidden/>
-                        
-                        <div>
-                            <p className="success-msg">{acceptHelp}</p>
-                            <button type="submit">Accept request</button>
-                        </div>
-                    </form>
+            <div className="base-wrapper">
 
-                    <form onSubmit={sendEmailDecline}>
-                        <input type="text" name="collaborator" defaultValue={post?.pendingCollaborators[post.pendingCollaborators.length-1]} hidden/>
-                        <input type="text" name="post-title" defaultValue={post?.title} hidden/>
-                        <input type="text" name="owner" defaultValue={post?.owner} hidden/>
-                        
-                        <div>
-                            <button type="submit" >Decline</button>
-                            <p className="error-msg">{declineHelp}</p>
-                        </div>
-                    </form>
+                <div className="accept-or-decline-container">
+                    
+                    <div className="accept-or-decline-text-container">
+                        <div className="add-collaborator-icon"></div>
+                        <p className="accept-or-decline-p">The account:</p>
+                        <h1 className="accept-or-decline-h1">{post?.pendingCollaborators[post.pendingCollaborators.length-1]}</h1>
+                        <p className="accept-or-decline-p">Wants to help you!</p>
+                    </div>
+                    
+                    <div className="error-div">
+                        <p className="success-msg">{acceptHelp}</p>
+                        <p className="error-msg">{declineHelp}</p>
+                    </div>
+
+                    <div className="accept-or-decline-btns">     
+                        {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
+                        <form onSubmit={sendEmailAccept}>
+                            <input type="text" name="collaborator" defaultValue={post?.pendingCollaborators[post.pendingCollaborators.length-1]} hidden/>
+                            <input type="text" name="post-title" defaultValue={post?.title} hidden/>
+                            <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+                            
+                            <div className="app-div">
+                                <button className="accept-btn" type="submit">Accept request</button>
+                            </div>
+                        </form>
+
+                        <form onSubmit={sendEmailDecline}>
+                            <input type="text" name="collaborator" defaultValue={post?.pendingCollaborators[post.pendingCollaborators.length-1]} hidden/>
+                            <input type="text" name="post-title" defaultValue={post?.title} hidden/>
+                            <input type="text" name="owner" defaultValue={post?.owner} hidden/>
+                            
+                            <div>
+                                <button className="decline-btn" type="submit">Decline</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
+            </div>
         </>
     );
 }

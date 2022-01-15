@@ -1,4 +1,42 @@
 .landing-page-container {
-    height: 100vh;
-    align-items: center;
+
+    width: 100%;
+
+    .hero-img {
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+        @include flexStyling(column, center, flex-start);
+
+        .hero-img-text {
+            position: relative;
+            @include flexStyling(column, center, flex-start);
+            margin-left: 5%;
+            .hero-h1 {
+                font-size: 80px;
+                color: #FFF;
+            }
+            .hero-btn {
+                border: 5px solid #FFF;
+                background: transparent;
+                font-size: 20px;
+                padding: 2% 10% 2% 10%;
+                color: #FFF;
+                border-radius: 40px;
+                cursor: pointer;
+            }
+        }
+    }
+    .hero-img::before {
+        content: '';
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-image: url(../assets/images/annie-spratt-QckxruozjRg-unsplash.jpg);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+    }
 }

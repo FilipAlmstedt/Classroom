@@ -93,7 +93,7 @@ export const ShowPosts = () => {
                     disabledClassName={"pagniation-disabled"}
                     activeClassName={"pagination-active"}
                 />
-            </div>: <h1 className="app-h1">Loading...</h1>}
+            </div>: <div className="base-wrapper"><h1 className="app-h1">Loading...</h1></div>}
         </>
     );
 }

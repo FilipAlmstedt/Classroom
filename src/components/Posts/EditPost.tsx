@@ -26,6 +26,7 @@ export const EditPost = () => {
 
     let { id } = useParams<Params>();
     const getURL = "http://localhost:3000/edit-post/"+id;
+    const getAcceptOrDeclineURL = "http://localhost:3000/accept-or-decline/"+id;
     
     
     const [post, setPost] = useState<Post>();
@@ -204,7 +205,7 @@ export const EditPost = () => {
                 <form onSubmit={sendEditRequestMail}>
                     <input className="app-input" type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
                     <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
-                    <input className="app-input" type="text" name="link" defaultValue={getURL} hidden/>
+                    <input className="app-input" type="text" name="link" defaultValue={getAcceptOrDeclineURL} hidden/>
                     <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
         
                     {

@@ -37,34 +37,65 @@ export const CreateNewAccount = () => {
 
     return (
 
-      <div className="">
-        <h1> Register a new user! </h1>
-        <input
-          type="text"
-          placeholder="Email..."
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
-        <p className="error-msg">{emailError}</p>
-        <input
-          type="password"
-          placeholder="Password..."
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-        />
-        <input
-          type="password"
-          placeholder="Repeat the password..."
-          onChange={(event) => {
-            setConfirmPassword(event.target.value);
-          }}
-        />
-        <p className="error-msg">{passwordError}</p>
+      <div className="create-new-user-container">
 
-        <button onClick={registerNewAccount}> Create User</button>
-        <Link to="/login">Go Back</Link>
+        <div className="new-user-image-container">
+          <div className="new-user-info-text">
+            <h1 className="app-h1">Create new Account</h1>
+          </div>
+        </div>
+
+        <div className="inputs-container">
+          <h1 className="create-user-h1">Register a new user!</h1>
+          
+          <div className="input-email">
+            <label className="app-label new-user-label" htmlFor="email">Email:</label>
+            <input
+              id="email"
+              className="app-input"
+              type="text"
+              placeholder="Email..."
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+            />
+            <p className="error-msg">{emailError}</p>
+          </div>
+
+          <div className="input-password">  
+            <label className="app-label new-user-label" htmlFor="password">Password:</label>
+            <input
+              id="password"
+              className="app-input"
+              type="password"
+              placeholder="Password..."
+              onChange={(event) => {
+                setPassword(event.target.value);
+              }}
+            />
+          </div>
+
+          <div className="input-repeat-password">  
+            <label className="app-label new-user-label" htmlFor="repeat-password">Repeat password:</label>
+            <input
+              id="repeat-password"
+              className="app-input"
+              type="password"
+              placeholder="Repeat the password..."
+              onChange={(event) => {
+                setConfirmPassword(event.target.value);
+              }}
+            />
+            <p className="error-msg">{passwordError}</p>
+          </div>
+
+          <div className="register-btn-container">
+            <button className="register-user-btn" onClick={registerNewAccount}>Create User</button>
+          </div>
+        
+
+          <Link className="app-link go-back" to="/login">Go Back</Link>
+        </div>
       </div>
 
     );

@@ -31,7 +31,7 @@ export const Navbar = () => {
     
     return (
         <>
-            <header>
+            <header className="app-header">
                 <Link to="/">
                     <div className="logo-container">
                         <div className="logo"></div>
@@ -40,12 +40,12 @@ export const Navbar = () => {
                         </h2>
                     </div>
                 </Link>
-                <nav>
-                    <ul>
-                        {checkUserLoggedIn ? <p>Current User: {auth.currentUser?.email}</p>: null}
-                        <li><Link to="/show-posts">Show Posts</Link></li>
-                        {checkUserLoggedIn ? <li><Link to="/create-new-post">Create new Post</Link></li>: null}
-                        {checkUserLoggedIn ? <div onClick={logout}><li><Link to="">Log out</Link></li></div>: <li><Link to="/login">Log in</Link></li>}
+                <nav className="app-navbar">
+                    <ul className="app-ul">
+                        {checkUserLoggedIn ? <p className="app-p">Current User: {auth.currentUser?.email}</p>: null}
+                        <li className="app-li"><Link to="/show-posts">Show Posts</Link></li>
+                        {checkUserLoggedIn ? <li className="app-li"><Link to="/create-new-post">Create new Post</Link></li>: null}
+                        {checkUserLoggedIn ? <div className="app-div" onClick={logout}><li className="app-li"><Link to="">Log out</Link></li></div>: <li className="app-li"><Link to="/login">Log in</Link></li>}
                     </ul>
                 </nav>
             </header>

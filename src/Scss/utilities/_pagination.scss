@@ -4,7 +4,7 @@
 
     list-style: none;
 
-    @include flexStyling(row, center);
+    @include flexStyling(row, center, center);
 
     a {
         padding: 10px;

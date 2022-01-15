@@ -29,33 +29,61 @@ export const Login = () => {
     return (
 
         <>  
-            
+
                 <div className="login-container">
-                    <h1>This is the login page!</h1>
+                
+                    <div className="login-info-img">
+                        <div className="login-info-img-text">
+                            <h1 className="app-h1 login-h1">Classroom</h1>
+                        </div>
+                        <div className="login-info-img-text">
+                            <h3 className="app-p">
+                                Here to help you!
+                            </h3>
+                            </div>
+                    </div>
 
-                    <input
-                        type="text"
-                        placeholder="Email..."
-                        onChange={(event) => {
-                        setEmail(event.target.value);
-                        }}
-                    />
-                    <p className="error-msg">{emailError}</p>
+                    <div className="login-inputs-wrapper">
+                        <h1 className="app-h1 login-h1">Sign in here!</h1>
 
-                    <input
-                        type="password"
-                        placeholder="Password..."
-                        onChange={(event) => {
-                        setPassword(event.target.value);
-                        }}
-                    />
-                    <p className="error-msg">{passwordError}</p>
+                        <div className="login-inputs">
+                            <div className="input-email">
+                                <label className="app-label login-label" htmlFor="email">Email:</label>
+                                <input
+                                    id="email"
+                                    className="app-input"
+                                    type="text"
+                                    placeholder="Email..."
+                                    onChange={(event) => {
+                                    setEmail(event.target.value);
+                                    }}
+                                />
+                                <p className="app-p error-msg">{emailError}</p>
+                            </div>
 
-                    <button onClick={login}> Login</button>
-
-                    <Link to="/register">Haven't got an account? Register here!</Link>
-                    <Link to="/forgot">Forgot your password?</Link>
+                            <div className="input-password">
+                                <label className="app-label login-label" htmlFor="password">Password:</label>
+                                <input
+                                    id="password"
+                                    className="app-input"
+                                    type="password"
+                                    placeholder="Password..."
+                                    onChange={(event) => {
+                                    setPassword(event.target.value);
+                                    }}
+                                />
+                                <p className="app-p error-msg">{passwordError}</p>
+                                <Link className="forgot-password-link" to="/forgot">Forgot your password?</Link>
+                            </div>
+                        
+                            <button className="login-btn" onClick={login}>Log in</button>
+                                    
+                            <Link className="app-link" to="/register">Haven't got an account? Register here!</Link>
+                        </div>
+                    </div>
+                    
                 </div>
+       
         </>
     );
 }

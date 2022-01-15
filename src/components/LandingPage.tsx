@@ -51,7 +51,14 @@ export const LandingPage = () => {
     return (
         <>
             <div className="landing-page-container">
-                <h1 className="app-h1">This is the LANDING PAGE</h1>
+                <div className="hero-img">
+                    <div className="hero-img-text">
+                        <h1 className="hero-h1">WELCOME TO CLASSROOM</h1>
+                        {/* <h1 className="hero-h1">CLASSROOM</h1> */}
+                        <button className="hero-btn">LEARN MORE</button>
+                    </div>
+                </div>
+                
                 <h1 className="app-h1">Recent Posts:</h1>
                 {posts.map((post) => {
                     return(

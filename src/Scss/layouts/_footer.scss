@@ -1,6 +1,11 @@
 footer {
-    background-color: #000;
+    min-height: 10vh;
     color: #FFF;
     width: 100%;
-    @include flexStyling(row, space-evenly)
+    box-shadow: 12px 12px 2px 1px black;
+    background-image: url(../assets/images/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+
+    @include flexStyling(row, space-evenly, center)
 }

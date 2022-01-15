@@ -1,25 +1,29 @@
-header {
+.app-header {
     min-height: 10vh;
-    background-color: black;
-    color: white;
+    color: #FFF;
     width: 100%;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.9);
+    background-image: url(../assets/images/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+
     a {
-        color: white;
+        color: #FFF;
         text-decoration: none;
     }
 
-    @include flexStyling(column, center);
+    @include flexStyling(column, center, center);
 
     
     @include desktopsOnly() {
-        @include flexStyling(row, space-between);
+        @include flexStyling(row, space-between, center);
         .logo-container {
             margin-left: 5%;
         }
     }   
 
     .logo-container {
-        @include flexStyling(row, center);
+        @include flexStyling(row, center, center);
         
         .logo {
             background: url(../assets/icons/company_logo.png);
@@ -30,18 +34,18 @@ header {
         }
     }
 
-    ul {
+    .app-ul {
 
         text-align: center;
         margin-top: 10px;
         margin-bottom: 10px;
 
         @include desktopsOnly() {
-            @include flexStyling(row, center);
+            @include flexStyling(row, center, center);
         }   
        
         list-style: none;
-        li {
+        .app-li {
             @include desktopsOnly() {
                 margin-left: 5%;
                 margin-right: 5%;

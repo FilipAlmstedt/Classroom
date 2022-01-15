@@ -1,0 +1,80 @@
+.create-new-post-container {
+    width: $full-width;
+    
+
+    @include flexStyling(column, center, center);
+
+    .title-input {
+        margin-top: 2%;
+        margin-bottom: 2%;
+        width: 80%;
+        .app-input {
+            width: $full-width;
+            height: 50px;
+            border-radius: 10px;
+        }
+    }
+
+    
+    .desc-and-code-container {
+        width: $full-width; 
+        @include flexStyling(column, center, center);
+        .textarea-desc {
+            width: 95%;
+            height: 300px;
+            margin: 5px;
+
+            .app-textarea {
+                width: $full-width;
+                height: $full-height;
+                resize: none;
+            }
+        }
+
+        .code-editor {
+            width: 95%;
+            margin: 50px 5px 50px 5px ;
+            
+            height: 300px;
+            .ace-editor {
+                overflow-y: auto;
+            }
+        }
+    }
+    .create-new-post-btn {
+        margin-top: 10%;
+        margin-bottom: 10%;
+    }
+
+    @include desktopsOnly() {
+
+        .desc-and-code-container {
+            height: 400px;
+            @include flexStyling(row, center, center);
+            width: $full-width;
+            .textarea-desc {
+                width: 33%;    
+            }
+
+            .coding-input-container {
+                @include flexStyling(row, center, center);
+            }
+        }
+        .code-editor {
+            width: 33% !important;
+            margin: 5px;
+        }
+        .create-new-post-btn {
+            margin-top: 0;
+            margin-bottom: 2%;
+        }
+
+    }
+
+
+    .textarea-desc {
+        width: $full-width;
+    }
+    
+
+}
