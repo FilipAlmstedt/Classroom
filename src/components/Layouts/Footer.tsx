@@ -8,7 +8,7 @@ export const Footer = () => {
                 <div>
                     <div><h1>Classroom</h1></div>
                     <div>
-                        <Link to="https://github.com/FilipAlmstedt/Classroom"><h1>Link to Github</h1></Link>
+                        <a href="https://www.github.com/FilipAlmstedt/Classroom"><h1>Link to Github</h1></a>
                     </div>
                 </div>
             </footer>

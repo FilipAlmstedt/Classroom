@@ -5,6 +5,7 @@ import { doc, DocumentData, DocumentSnapshot, getDoc, setDoc  } from "firebase/f
 import { auth, db } from '../../firebase';
 import { ShowPostedCode } from "../ShowPostedCode";
 
+// ! EmailJS only works with GMAIL because you can only use one service-ID
 import emailjs from '@emailjs/browser';
 import config  from '../../config/config';
 import AceEditor from "react-ace";
@@ -51,7 +52,17 @@ export const EditPost = () => {
                         setSuccessMsg("");
                         setError("You have already send a request to edit!");
                     } else {
-                        emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdEditRequest || "", e.target, config.emailJSConfig.userId)
+
+                        let serviceId = "";
+                        if(post.owner.search("gmail") !== -1) {
+                            serviceId = config.emailJSConfig.serviceIdGmail || "";
+                        }
+                        if(post.owner.search("outlook") !== -1 || post.owner.search("medieinstitutet") !== -1) {
+                            serviceId = config.emailJSConfig.serviceIdOutlook || "";
+                        } 
+         
+
+                        emailjs.sendForm(serviceId, config.emailJSConfig.templateIdEditRequest || "", e.target, config.emailJSConfig.userId)
                         .then(() => {
                             setSuccessMsg("An email has been send to the project owner. You will get an email if the owner has accepted your request. Keep an eye your inbox!");
                             // Push into the user in the collaborators array that is wating for the owners response.
@@ -66,7 +77,16 @@ export const EditPost = () => {
                     }
                 })
             } else {
-                emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdEditRequest || "", e.target, config.emailJSConfig.userId)
+
+                let serviceId = "";
+                if(post.owner.search("gmail") !== -1) {
+                    serviceId = config.emailJSConfig.serviceIdGmail || "";
+                }
+                if(post.owner.search("outlook") !== -1 || post.owner.search("medieinstitutet") !== -1) {
+                    serviceId = config.emailJSConfig.serviceIdOutlook || "";
+                }
+
+                emailjs.sendForm(serviceId, config.emailJSConfig.templateIdEditRequest || "", e.target, config.emailJSConfig.userId)
                 .then(() => {
                     setSuccessMsg("An email has been send to the project owner. You will get an email if the owner has accepted your request. Keep an eye your inbox!");
                     // Push into the user in the collaborators array that is wating for the owners response.
@@ -91,7 +111,16 @@ export const EditPost = () => {
                     // eslint-disable-next-line array-callback-return
                     post.members.map((member) => {
                         if(member === auth.currentUser?.email) {
-                            emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdCollaboratorEdits || "", e.target, config.emailJSConfig.userId)
+                            
+                            let serviceId = "";
+                            if(post.owner.search("gmail") !== -1) {
+                                serviceId = config.emailJSConfig.serviceIdGmail || "";
+                            }
+                            if(post.owner.search("outlook") !== -1 || post.owner.search("medieinstitutet") !== -1) {
+                                serviceId = config.emailJSConfig.serviceIdOutlook || "";
+                            }
+                            
+                            emailjs.sendForm(serviceId, config.emailJSConfig.templateIdCollaboratorEdits || "", e.target, config.emailJSConfig.userId)
                             .then(() => {
                                 setCollaboratorEditMsg("An email has been send to the project owner notifying that you made a change!");
                                 updateCode();
@@ -170,6 +199,13 @@ export const EditPost = () => {
         setNewHtml(newHtmlCode);
     }
 
+    const showCollaborators = post?.members.map((member) => {
+        return (
+            <p className="app-p" key={member}>{member}</p>
+        );
+    })
+
+   
     const updateCode = async () => {
    
             const docRef = doc(db, "post", id || "");
@@ -190,47 +226,77 @@ export const EditPost = () => {
             })
 
     }
-
+    
     return (
 
         <>
             <div className="edit-post-container">
-                <h1 className="app-h1">{post?.title}</h1>
-                <p className="app-p">Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by {post?.owner}</p>
 
-                {allowedToEdit ? <p className="info-msg app-p">You are the owner of this post!</p>: null}
-                {memberAllowedToEdit ? <p className="info-msg app-p">You are a collaborator of this post!</p>: null}
-                
-                {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
-                <form onSubmit={sendEditRequestMail}>
-                    <input className="app-input" type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
-                    <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
-                    <input className="app-input" type="text" name="link" defaultValue={getAcceptOrDeclineURL} hidden/>
-                    <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
-        
-                    {
-                    (auth.currentUser && allowedToEdit && !memberAllowedToEdit) || (auth.currentUser && !allowedToEdit && memberAllowedToEdit) || !auth.currentUser?             
-                    null
-                    : 
-                    <div className="app-div">
-                        <p className="info-msg app-p">If you want to help, send a request to edit code and see if the owner wants help!</p>
-                        <button type="submit">Want to help? Send invite request!</button>
+                <div className="post-info-div">
+                    <div className="title-and-date-div">
+                        
+                        <h1 className="app-h1 title-and-date-h1">{post?.title}</h1>
+                        <p className="app-p title-and-date-text">Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by <b className="post-owner">{post?.owner}</b></p>
+    
                     </div>
-                    }
-                </form>
-        
-                <p className="error-msg">{error}</p>
-                <p className="success-msg">{successMsg}</p>
+                    
+
+                    <div className="show-collaborators-div app-div">
+                        <div className="show-collaborators">
+                            <h4 className="app-h4">Collaborators:</h4>
+                            { post?.members.length ? <div className="app-div">{showCollaborators}</div> : <p className="app-p">No collaborators as of now!</p>}
+                        </div>     
+                    </div>
+
+                </div>
+                
+                <div className="edit-post-hr-line-div">
+                    <hr className="edit-post-hr-line"/>
+                </div>
+
+                <div className="hidden-emailJS-form">
+                    
+                    {allowedToEdit ? <p className="info-msg app-p">You are the owner of this post!</p>: null}
+                    {memberAllowedToEdit ? <p className="info-msg app-p">You are a collaborator of this post!</p>: null}
+                    
+                    {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}
+                    <form onSubmit={sendEditRequestMail}>
+                        <input className="app-input" type="text" name="new-member-email" defaultValue={auth?.currentUser?.email || ""} hidden/>
+                        <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
+                        <input className="app-input" type="text" name="link" defaultValue={getAcceptOrDeclineURL} hidden/>
+                        <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
+
+                        {
+                        (auth.currentUser && allowedToEdit && !memberAllowedToEdit) || (auth.currentUser && !allowedToEdit && memberAllowedToEdit) || !auth.currentUser?             
+                        null
+                        : 
+                        <div className="app-div send-request-div">
+                            <p className="info-msg app-p">If you want to help, send a request to edit code and see if the owner wants help!</p>
+                            <button className="send-request-to-edit-btn" type="submit">Send request to edit<div className="send-mail-icon"></div></button>
+                        </div>
+                        }
+                    </form>
+
+                    <p className="error-msg">{error}</p>
+                    <p className="success-msg">{successMsg}</p>
+                </div>
 
                 <div className="desc-and-code-container">
+   
                     <div className="desc">
-                        <p className="app-p">{post?.description}</p>
+                        <label className="app-label"><h2 className="app-h2 desc-label">WHAT'S THE PROBLEM?</h2></label>
+                        <p className="app-p desc-text">{post?.description}</p>
                     </div>
 
-                    
-                    {(allowedToEdit || memberAllowedToEdit) ? 
+
                     <div className="code-editor">
-                        <label className="app-label" htmlFor="html"><h2 className="app-h2">HTML:</h2></label>
+
+                        <div className="label-and-icon">
+                            <div className="html-icon"></div>
+                            <label className="app-label" htmlFor="html"><h2 className="app-h2">HTML:</h2></label>
+                        </div>
+
+                        {(allowedToEdit || memberAllowedToEdit) ?      
                         <AceEditor
                             mode={"html"}
                             theme="dracula"
@@ -242,10 +308,7 @@ export const EditPost = () => {
                             className="ace-editor"     
                             fontSize={"15px"}    
                         />
-                    </div>
-                    : 
-                    <div className="code-editor">
-                        <label className="app-label" htmlFor="html"><h2 className="app-h2">HTML:</h2></label>
+                        : 
                         <AceEditor 
                             mode={"html"}
                             theme="dracula"
@@ -258,39 +321,43 @@ export const EditPost = () => {
                             readOnly
                             fontSize={"15px"}
                         />
-                    </div>}
-
-                    {(allowedToEdit || memberAllowedToEdit) ?
-                    <div className="code-editor"> 
-                        <label className="app-label" htmlFor="css"><h2 className="app-h2">CSS:</h2></label>
-                        <AceEditor 
-                            mode={"css"}
-                            theme="dracula"
-                            value={newCss}
-                            onChange={updateCssCode}
-                            name="css"
-                            width='100%'
-                            height='300px'
-                            className="ace-editor"   
-                            fontSize={"15px"}
-                        />
+                        }
                     </div>
-                    : 
+                    
                     <div className="code-editor"> 
-                        <label className="app-label" htmlFor="css"><h2 className="app-h2">CSS:</h2></label>
-                        <AceEditor 
-                            mode={"css"}
-                            theme="dracula"
-                            value={newCss}
-                            onChange={updateCssCode}
-                            name="css"
-                            width='100%'
-                            height='300px'
-                            className="ace-editor-edit-disabled ace-editor"   
-                            readOnly
-                            fontSize={"15px"}
-                        />
-                    </div>}
+
+                        <div className="label-and-icon">
+                            <div className="css-icon"></div>
+                            <label className="app-label" htmlFor="css"><h2 className="app-h2">CSS:</h2></label>
+                        </div>
+
+                        {(allowedToEdit || memberAllowedToEdit) ?                      
+                            <AceEditor 
+                                mode={"css"}
+                                theme="dracula"
+                                value={newCss}
+                                onChange={updateCssCode}
+                                name="css"
+                                width='100%'
+                                height='300px'
+                                className="ace-editor"   
+                                fontSize={"15px"}
+                            />
+                        :                      
+                            <AceEditor 
+                                mode={"css"}
+                                theme="dracula"
+                                value={newCss}
+                                onChange={updateCssCode}
+                                name="css"
+                                width='100%'
+                                height='300px'
+                                className="ace-editor-edit-disabled ace-editor"   
+                                readOnly
+                                fontSize={"15px"}
+                            />                 
+                        }
+                    </div>       
                 </div>
 
                 <div className="update-btn-container">
@@ -308,14 +375,14 @@ export const EditPost = () => {
 
                         {allowedToEdit || memberAllowedToEdit
                         ? 
-                        <div className="app-div">
-                            <button className="update-btn" type="submit">Update</button>
+                        <div className="app-div update-btn-with-error-msg">
+                            <button className="update-btn" type="submit">Update and save!</button>
                             <p className="success-msg app-p">{successfulUpdateMsg}</p>
                             <p className="success-msg app-p">{collaboratorEditMsg}</p>
                         </div> 
                         : 
-                        <div className="app-div">
-                            <button className="update-btn" disabled>Update</button>
+                        <div className="app-div update-btn-with-error-msg">
+                            <button className="update-btn" disabled>Update and save!</button>
                         </div>}
                     </form>
                 </div>   

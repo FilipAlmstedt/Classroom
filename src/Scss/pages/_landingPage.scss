@@ -10,21 +10,40 @@
 
         .hero-img-text {
             position: relative;
-            @include flexStyling(column, center, flex-start);
+            
+            height: 50vh;
+            @include flexStyling(column, space-evenly, flex-start);
             margin-left: 5%;
             .hero-h1 {
-                font-size: 80px;
+                font-size: 50px;
                 color: #FFF;
             }
+            @include desktopsOnly() {
+                .hero-h1 {
+                    font-size: 80px;
+                }
+                .learn-more-link {
+                    width: 30%;
+                }
+            }
+            .learn-more-link {
+                width: 70%;
+            }
+            
             .hero-btn {
+                cursor: pointer;
                 border: 5px solid #FFF;
                 background: transparent;
                 font-size: 20px;
-                padding: 2% 10% 2% 10%;
+                padding: 2.5% 10% 2.5% 10%;
                 color: #FFF;
                 border-radius: 40px;
-                cursor: pointer;
+                transition: all .5s ease-in-out;
             }
+            .hero-btn:hover {
+                transform: scale(1.1);
+            }
+
         }
     }
     .hero-img::before {
@@ -38,5 +57,58 @@
         background-size: cover;
         background-position: center;
         opacity: 0.3;
+    }
+
+    .about-info-container {
+        @include flexStyling(column, center, center);
+        width: $full-width;
+
+        margin-top: 3%;
+        margin-bottom: 3%;
+
+        .show-frameworks-div {
+            @include flexStyling(column, center, center);
+            width: $full-width;
+            
+            .html-div, .css-div, .js-div, .sass-div {
+                @include flexStyling(column, center, center);
+                
+                margin-top: 3%;
+                margin-bottom: 3%;
+
+                width: 200px;
+                height: 250px;
+                border-radius: 20px;
+                background: url(../assets/images/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+                background-size: cover;
+                transition: all .5s ease-in-out;
+
+                .html-image, .css-image, .js-image, .sass-image {
+                    width: 100px;
+                    height: 100px;
+                    background-size: cover;
+                }
+                .html-image {
+                    background-image: url(../assets/icons/html5-icon.png);
+                }
+                .css-image {
+                    background-image: url(../assets/icons/css3-icon.png);
+                }
+                .js-image {
+                    background-image: url(../assets/icons/javascript-icon.png);
+                }
+                .sass-image {
+                    background-image: url(../assets/icons/sass-icon.png);
+                }
+            }
+            .html-div:hover, .css-div:hover, .js-div:hover, .sass-div:hover {
+                transform: scale(1.1)
+            }
+        }
+        @include desktopsOnly() {
+            .show-frameworks-div {
+                @include flexStyling(row, space-evenly, center);
+            }
+        }
     }
 }

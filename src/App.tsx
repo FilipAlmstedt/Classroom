@@ -13,7 +13,6 @@ import { AcceptOrDecline } from "./components/Posts/AcceptOrDecline";
 import { ShowPosts } from "./components/Posts/ShowPosts";
 import { PageNotFound } from "./components/PageNotFound";
 
-
 function App() {
 
   const url = window.location.href;

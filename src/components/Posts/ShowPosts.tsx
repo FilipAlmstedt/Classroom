@@ -14,10 +14,9 @@ export const ShowPosts = () => {
 
     // Custom Pagination with pages
     const [pageNumber, setPageNumber] = useState(0);
-    const postsPerPage = 5;
+    const postsPerPage = 3;
     const pagesVisited = pageNumber*postsPerPage;
     const pageCount = Math.ceil(posts.length/postsPerPage);
-    
     
     const getPosts = async () => {
         const first = query(collection(db, "post"), orderBy("date"));
@@ -27,8 +26,8 @@ export const ShowPosts = () => {
         setLoading(false);
     }
 
-     const storeData = (data: QuerySnapshot<DocumentData>) => {
-        
+    const storeData = (data: QuerySnapshot<DocumentData>) => {
+    
         const collectData: Post[] = [];
         
         data.forEach(
@@ -50,22 +49,37 @@ export const ShowPosts = () => {
                 collectData.push(collectedPost);    
         })      
         setPosts(collectData);
-     }
+    }
+    
 
     const displayPosts = posts.slice(pagesVisited, pagesVisited + postsPerPage)
     .map((post) => {
+        
         return(
+                       
             <div className="post-div" key={post.id}>
-                <Link to={`/edit-post/${post.id}`}><h2 className="app-h2">{post.title}</h2></Link>
-                <h3 className="app-h3">{new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)}</h3>
-                <p className="app-p">Created by: {post.owner}</p>
+                <Link className="post-title-header" to={`/edit-post/${post.id}`}><h3 className="post-title-header app-h3">{post.title}</h3></Link>
+                <p className="date-text app-p">Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)} by: <b className="owner-text">{post.owner}</b></p>
+
+                <div className="show-category-and-members-div">
+                    <div className="show-category-div">
+                        <div className="category-icons category-icon-html"></div>
+                        <div className="category-icons category-icon-css"></div>
+                    </div>
+                    <div className="collaborator-info">
+                        <p className="member-info app-p"><b>Collaborators: {post.members.length}</b></p>
+                    </div>
+                </div>
+
+                <hr className="app-hr"/>
             </div>
-        );     
+
+        );   
+
     })
  
-    const changePage = (event: any) => {
-        const newOffset = (event.selected * postsPerPage) % posts.length;
-        setPageNumber(newOffset)
+    const changePage = (event: any) => { 
+        setPageNumber(event.selected)
     }
 
     useEffect(() => {
@@ -76,10 +90,16 @@ export const ShowPosts = () => {
 
     return (
         <>
-            {!loading ?<div className="landing-page-container">
-                <h1 className="app-h1">Look at the problems people have:</h1>
-                <h1 className="app-h1">Posts:</h1>
-                {displayPosts}
+            {!loading ?
+            <div className="show-posts-container">
+                
+                <div className="page-header">
+                    <h1 className="app-h1">Top Recent Problems</h1>
+                </div>
+
+                <div className="show-all-posts-container">
+                    {displayPosts}
+                </div>
                 
 
                 <ReactPaginate 
@@ -93,7 +113,12 @@ export const ShowPosts = () => {
                     disabledClassName={"pagniation-disabled"}
                     activeClassName={"pagination-active"}
                 />
-            </div>: <div className="base-wrapper"><h1 className="app-h1">Loading...</h1></div>}
+            </div>
+            : 
+            <div className="base-wrapper">
+                <h1 className="app-h1">Loading...</h1>
+            </div>
+            }
         </>
     );
 }

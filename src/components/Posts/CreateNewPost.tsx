@@ -52,7 +52,7 @@ export const CreateNewPost = () => {
     return (
         <>  
             <div className="create-new-post-container">
-                <h1 className="app-h1">Create a new Post here!</h1>
+                <h1 className="app-h1 create-post-page-h1">Create a new Post here!</h1>
                 
                 <div className="title-input">
                     <label className="app-label" htmlFor="title">Title:</label>
@@ -65,14 +65,16 @@ export const CreateNewPost = () => {
 
                 <div className="desc-and-code-container">
                     <div className="textarea-desc">
-                        <label className="app-label" htmlFor="desc"><h2>Description:</h2></label>
+                        <label className="app-label" htmlFor="desc"><h2>Describe your problem:</h2></label>
                         <textarea className="app-textarea" name="desc" onChange={(evn) => setDesc(evn.target.value)} placeholder="Type in what the problem is..." id=""></textarea>
                     </div>
 
                         <div className="code-editor">
-                            <label className="app-label" htmlFor="html">
-                                <h2 className="app-h2">HTML:</h2>
-                            </label>
+                            <div className="label-and-icon">
+                                <div className="html-icon"></div>
+                                <label className="app-label" htmlFor="css"><h2 className="app-h2">HTML:</h2></label>
+                            </div>
+
                             <AceEditor
                                 mode={"html"}
                                 theme="dracula"
@@ -87,7 +89,11 @@ export const CreateNewPost = () => {
                         </div>
 
                         <div className="code-editor">
-                            <label className="app-label" htmlFor="css"><h2>CSS:</h2></label>
+                            <div className="label-and-icon">
+                                <div className="css-icon"></div>
+                                <label className="app-label" htmlFor="css"><h2 className="app-h2">CSS:</h2></label>
+                            </div>
+
                             <AceEditor
                                 mode={"css"}
                                 theme="dracula"
@@ -104,7 +110,7 @@ export const CreateNewPost = () => {
                 </div>
 
                
-                <button className="create-new-post-btn" onClick={createNewPost}>Post!</button>
+                <button className="create-new-post-btn" onClick={createNewPost}>Create Post!</button>
               
 
             </div>

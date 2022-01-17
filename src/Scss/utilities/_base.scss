@@ -2,9 +2,11 @@
     padding: 0;
     margin: 0;
 }
+html {
+    scroll-behavior: smooth;
+}
 body {
     width: $full-width;
-   
 }
 .App {
     @include flexStyling(column, space-between, center);
@@ -24,24 +26,19 @@ without a class it will spread to other elements on the app so
 these will prevent it.
 */
 
-.app-h1 {
+.app-h1, .app-h2, .app-h3, .app-h4 {
     color: #FFF;
+    font-family: 'Roboto Mono', monospace;
+    text-align: left;
 }
-
-// .app-h2 {
-
-// }
-
-.app-h3 {
-    color: #FFF;
-}
-// .app-h4 {
-
-// }
 
 // Paragraph
-.app-p, .app-label {
+.app-p, .app-label, .app-link  {
     color: #FFF;
+    text-align: left;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: normal;
+    font-size: medium;
 }
 
 .app-input {

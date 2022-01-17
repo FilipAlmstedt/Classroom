@@ -78,7 +78,7 @@ export const Login = () => {
                         
                             <button className="login-btn" onClick={login}>Log in</button>
                                     
-                            <Link className="app-link" to="/register">Haven't got an account? Register here!</Link>
+                            <Link className="app-link register-link" to="/register">Haven't got an account? Register here!</Link>
                         </div>
                     </div>
                     

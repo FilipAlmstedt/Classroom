@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+
 @import "./utilities/variables/variables";
 
 @import "./utilities/mixins";
@@ -17,3 +19,4 @@
 @import "./pages/posts/editPosts";
 @import "./pages/posts/acceptOrDecline";
 @import "./pages/showPostedCode";
+@import "./pages/posts/showPosts";

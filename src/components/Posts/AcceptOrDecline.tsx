@@ -18,7 +18,15 @@ export const AcceptOrDecline = () => {
     const sendEmailAccept = (e: any) => {
         e.preventDefault();
     
-        emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdInviteAccepted || "", e.target, config.emailJSConfig.userId)
+        let serviceId = "";
+        if(post?.pendingCollaborators[post?.pendingCollaborators.length-1].search("gmail") !== -1) {
+            serviceId = config.emailJSConfig.serviceIdGmail || "";
+        }
+        if(post?.pendingCollaborators[post?.pendingCollaborators.length-1].search("medieinstitutet") !== -1 || post?.pendingCollaborators[post?.pendingCollaborators.length-1].search("outlook") !== -1) {
+            serviceId = config.emailJSConfig.serviceIdOutlook || "";
+        }
+
+        emailjs.sendForm(serviceId || "", config.emailJSConfig.templateIdInviteAccepted || "", e.target, config.emailJSConfig.userId)
           .then(() => {
                 let incomingMember: string = post?.pendingCollaborators[post?.pendingCollaborators.length-1] || "";
         
@@ -37,7 +45,7 @@ export const AcceptOrDecline = () => {
     const sendEmailDecline = (e: any) => {
         e.preventDefault();
     
-        emailjs.sendForm(config.emailJSConfig.serviceId || "", config.emailJSConfig.templateIdInviteDeclined || "", e.target, config.emailJSConfig.userId)
+        emailjs.sendForm(config.emailJSConfig.serviceIdGmail || "", config.emailJSConfig.templateIdInviteDeclined || "", e.target, config.emailJSConfig.userId)
           .then(() => {
                 setDeclineHelp("You have declined help from the account: " + post?.pendingCollaborators[post.pendingCollaborators.length-1] + ". You can now please close this window!");
                 setPost(post);
