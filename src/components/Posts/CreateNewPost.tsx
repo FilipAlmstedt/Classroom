@@ -30,6 +30,8 @@ export const CreateNewPost = () => {
     const [cssCode, setCssCode] = useState(
         `/*Insert your CSS code here*/`
     );
+    const [errorEmptyTitle, setErrorEmptyTitle] = useState("");
+    const [errorEmptyDesc, setErrorEmptyDesc] = useState("");
   
     // Functions to store code in states
     const updateCssCode = (newCode: string) =>  {
@@ -39,9 +41,20 @@ export const CreateNewPost = () => {
         setHtmlCode(newCode);
     }
 
+    const checkIfInputsAreEmpty = () =>  {
+        if(!title) {
+            setErrorEmptyTitle("Please fill in a title!");
+        } 
+        if(!desc) {
+            setErrorEmptyDesc("Please fill in a description of your problem!")
+        } else {
+            createNewPost();
+        }
+    }
+
     // Create new post with stored states
     const createNewPost = async () => {
-        
+
         await addDoc(postsCollectionRef, {desc: desc , title: title, comments: [], css: cssCode, html: htmlCode, projectOwner: auth.currentUser?.email, members: [], date: Date.now(), pendingCollaborators: []}).catch((err) => {
             console.log(err);
         });
@@ -61,12 +74,14 @@ export const CreateNewPost = () => {
                         type="text" 
                         onChange={(evn) => setTitle(evn.target.value)}
                     />
+                    <p className="error-msg">{errorEmptyTitle}</p>
                 </div>
 
                 <div className="desc-and-code-container">
                     <div className="textarea-desc">
                         <label className="app-label" htmlFor="desc"><h2>Describe your problem:</h2></label>
                         <textarea className="app-textarea" name="desc" onChange={(evn) => setDesc(evn.target.value)} placeholder="Type in what the problem is..." id=""></textarea>
+                        <p className="error-msg">{errorEmptyDesc}</p>
                     </div>
 
                         <div className="code-editor">
@@ -110,7 +125,7 @@ export const CreateNewPost = () => {
                 </div>
 
                
-                <button className="create-new-post-btn" onClick={createNewPost}>Create Post!</button>
+                <button className="create-new-post-btn" onClick={checkIfInputsAreEmpty}>Create Post!</button>
               
 
             </div>

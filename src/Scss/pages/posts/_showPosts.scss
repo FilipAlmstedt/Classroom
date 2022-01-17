@@ -1,7 +1,10 @@
 .show-posts-container {
 
     width: 85%;
-    height: 100vh;
+    min-height: 100vh;
+
+    margin-bottom: 5%;
+
     @include flexStyling(column, flex-start, center);
 
     .page-header {
