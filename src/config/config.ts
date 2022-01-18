@@ -15,7 +15,8 @@ const config = {
         userId: process.env.REACT_APP_USERID,
         templateIdInviteAccepted: process.env.REACT_APP_TEMPLATEID_INVITE_ACCEPTED,
         templateIdInviteDeclined: process.env.REACT_APP_TEMPLATEID_INVITE_DECLINED,
-        templateIdCollaboratorEdits: process.env.REACT_APP_TEMPLATEID_COLLABORATOR_EDITS
+        templateIdCollaboratorEdits: process.env.REACT_APP_TEMPLATEID_COLLABORATOR_EDITS,
+        templateIdPostIsCompleted: process.env.REACT_APP_TEMPLATEID_POST_IS_COMPLETED
     }
 }
 

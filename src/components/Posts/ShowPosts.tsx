@@ -19,7 +19,7 @@ export const ShowPosts = () => {
     const pageCount = Math.ceil(posts.length/postsPerPage);
     
     const getPosts = async () => {
-        const first = query(collection(db, "post"), orderBy("date"));
+        const first = query(collection(db, "post"), orderBy("date", "desc"));
         setLoading(true);
         const data = await getDocs(first); 
         storeData(data);
@@ -37,7 +37,7 @@ export const ShowPosts = () => {
                     doc.id, 
                     doc.data().title,
                     doc.data().desc,
-                    doc.data().comments, 
+                    doc.data().completedPost, 
                     doc.data().html,
                     doc.data().css,
                     doc.data().projectOwner,

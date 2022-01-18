@@ -14,13 +14,13 @@ export const LandingPage = () => {
                 <div id="about-info-container" className="about-info-container">
                 
                     <div className="about-website-info">
-                        <h1 className="app-h1">A new website for student to test your small projects</h1>
+                        <h1 className="app-h1 about-website-info-h1">A new website for student to test your small projects</h1>
                         <div className="">
 
                         </div>
                     </div>
 
-                    <h2 className="app-h2">Frameworks and languages to use:</h2>
+                    <h2 className="app-h2 framework-h2">Frameworks and languages to use:</h2>
                     
                     <div className="show-frameworks-div">
                         <div className="html-div">

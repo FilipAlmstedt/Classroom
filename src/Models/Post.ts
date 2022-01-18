@@ -3,7 +3,7 @@ export class Post {
       public id: string,
       public title: string,
       public description: string,
-      public comments: string[],
+      public completedPost: boolean,
       public html: string,
       public css: string,
       public owner: string,

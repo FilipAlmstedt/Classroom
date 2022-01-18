@@ -137,6 +137,40 @@ export const EditPost = () => {
         }
     }
 
+    const sendSolvedProblemMail = (e: any) => {
+        
+        e.preventDefault();
+        if(post) {
+            if(post.members.length !== 0) {
+                
+                post.members.map((member) => {
+                    // ! e.target[0] = collaborator
+                    e.target[0].defaultValue = member;
+                    //console.log(e.target[0].defaultValue);
+                    
+                    let serviceId = "";
+                    if(member.search("gmail") !== -1) {
+                        serviceId = config.emailJSConfig.serviceIdGmail || "";
+                    }
+                    if(member.search("outlook") !== -1 || member.search("medieinstitutet") !== -1) {
+                        serviceId = config.emailJSConfig.serviceIdOutlook || "";
+                    }
+                    
+                    emailjs.sendForm(serviceId, config.emailJSConfig.templateIdPostIsCompleted || "", e.target, config.emailJSConfig.userId)
+                    .then(() => {
+                        post.completedPost = true; 
+                        updateCode();
+                    }, (error) => {
+                        console.log(error.text);              
+                    });
+                })
+            } else {
+                console.log("No members. Problem solved!");
+            }
+        }
+    }
+
+   
     const collectDoc = async () => {
         const docRef = doc(db, "post", id || "");
         const docSnap = await getDoc(docRef);  
@@ -145,7 +179,7 @@ export const EditPost = () => {
             docSnap.id.toString(), 
             docSnap.data()?.title,
             docSnap.data()?.desc,
-            docSnap.data()?.comments, 
+            docSnap.data()?.completedPost, 
             docSnap.data()?.html,
             docSnap.data()?.css,
             docSnap.data()?.projectOwner,
@@ -212,7 +246,7 @@ export const EditPost = () => {
             await setDoc(docRef, {
                 html: newHtml,
                 css: newCss,
-                comments: post?.comments,
+                completedPost: post?.completedPost,
                 date: post?.date,
                 desc: post?.description,
                 members: post?.members,
@@ -226,18 +260,18 @@ export const EditPost = () => {
             })
 
     }
-    
+
+
     return (
 
         <>
             <div className="edit-post-container">
-
+            { post?.completedPost ? <div className="app-div status-div"><div className="checkmark-icon"></div><h4 className="post-status app-h4">Solved</h4></div> : <h4 className="post-status-ongoing app-h4">Ongoing problem...</h4>}
                 <div className="post-info-div">
+               
                     <div className="title-and-date-div">
-                        
                         <h1 className="app-h1 title-and-date-h1">{post?.title}</h1>
                         <p className="app-p title-and-date-text">Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post?.date)} by <b className="post-owner">{post?.owner}</b></p>
-    
                     </div>
                     
 
@@ -256,7 +290,25 @@ export const EditPost = () => {
 
                 <div className="hidden-emailJS-form">
                     
-                    {allowedToEdit ? <p className="info-msg app-p">You are the owner of this post!</p>: null}
+                    {/*  */}
+                    {
+                    allowedToEdit ? 
+                    <div className="app-div send-solved-problem-div">
+                        <form onSubmit={sendSolvedProblemMail}>
+                            <input className="app-input" type="text" name="collaborator" defaultValue={""} hidden/>
+                            <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
+                            <input className="app-input" type="text" name="html-code" defaultValue={post?.html} hidden/>
+                            <input className="app-input" type="text" name="css-code" defaultValue={post?.css} hidden/>
+                            <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
+                            <p className="info-msg app-p">You are the owner of this post!</p>
+                           { !post?.completedPost ? <button type="submit" className="is-problem-solved-btn">Is the problem solved?</button>: null}
+                        </form>
+                        
+                    </div>
+                    : 
+                    null
+                    }
+                    
                     {memberAllowedToEdit ? <p className="info-msg app-p">You are a collaborator of this post!</p>: null}
                     
                     {/*The only reason to use a form here was to use EMailJS and I needed to send data to the mail in this form*/}

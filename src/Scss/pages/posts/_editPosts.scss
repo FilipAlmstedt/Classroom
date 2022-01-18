@@ -8,6 +8,26 @@
         opacity: 0.3;
     }
 
+    .status-div, .post-status-ongoing {
+        @include flexStyling(row, center, center);
+        width: 100%;
+        margin: 20px 40px 20px 40px;
+        .checkmark-icon {
+            background-image: url(../../assets/icons/checkbox-icon.png);
+            background-size: cover;
+            background-position: center;
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+        }
+    }
+    @include desktopsOnly() {
+        .status-div, .post-status-ongoing {
+            @include flexStyling(row, flex-start, center);
+            margin: 20px 0px 0px 40px;
+        }
+    }
+
     .post-info-div {
         @include flexStyling(column, center, center);
         margin: 5px 15px 15px 15px;
@@ -22,6 +42,12 @@
                 color: #F2720C;
             }
            
+            .post-status {
+                @include flexStyling(column, center, center);
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
         }
         .show-collaborators-div {
             padding-top: 40px;
@@ -42,14 +68,13 @@
         margin: 10px 0px 10px 25px;
         width: $full-width;
         @include flexStyling(column, flex-start, flex-start);
-        .send-request-div {
-            .send-request-to-edit-btn {
-                @include flexStyling(row, center, center);
+        .send-request-div, .send-solved-problem-div {
+            .send-request-to-edit-btn, .is-problem-solved-btn  {
+                cursor: pointer;
                 margin-top: 10px;
                 padding: 10px;
                 border: none;
                 border-radius: 5px;
-                cursor: pointer;
                 // .send-mail-icon {   
                 //     width: 30px;
                 //     height: 30px;
@@ -124,6 +149,9 @@
 
                 .title-and-date-h1, .title-and-date-text {
                     text-align: left !important;
+                }
+                .post-status {
+                    @include flexStyling(column, center, flex-start);
                 }
             }
            

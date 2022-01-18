@@ -7,7 +7,6 @@ interface ICodeInput {
 }
 
 export const ShowPostedCode = (props: ICodeInput) => {
-    // console.log(props.cssCode);
     
     return (
 

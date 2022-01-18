@@ -41,12 +41,12 @@ export const CreateNewAccount = () => {
 
         <div className="new-user-image-container">
           <div className="new-user-info-text">
-            <h1 className="app-h1">Create new Account</h1>
+            <h1 className="app-h1 create-account-img-header">Create new Account</h1>
           </div>
         </div>
 
         <div className="inputs-container">
-          <h1 className="create-user-h1">Register a new user!</h1>
+          <h1 className="app-h1 create-user-h1">Register a new user!</h1>
           
           <div className="input-email">
             <label className="app-label new-user-label" htmlFor="email">Email:</label>

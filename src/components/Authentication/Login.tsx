@@ -37,10 +37,8 @@ export const Login = () => {
                             <h1 className="app-h1 login-h1">Classroom</h1>
                         </div>
                         <div className="login-info-img-text">
-                            <h3 className="app-p">
-                                Here to help you!
-                            </h3>
-                            </div>
+                            <h3 className="app-h3">Here to help you!</h3>
+                        </div>
                     </div>
 
                     <div className="login-inputs-wrapper">
@@ -73,10 +71,10 @@ export const Login = () => {
                                     }}
                                 />
                                 <p className="app-p error-msg">{passwordError}</p>
-                                <Link className="forgot-password-link" to="/forgot">Forgot your password?</Link>
+                                <Link className="forgot-password-link app-link" to="/forgot">Forgot your password?</Link>
                             </div>
                         
-                            <button className="login-btn" onClick={login}>Log in</button>
+                            <button className="login-btn" onClick={login}>Log in!</button>
                                     
                             <Link className="app-link register-link" to="/register">Haven't got an account? Register here!</Link>
                         </div>

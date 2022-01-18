@@ -2,21 +2,25 @@
 
     @include flexStyling(column, center, stretch);
     height: 80vh; 
-    width: 80%;
+    width: 90%;
     margin-top: 5%;
-    margin-bottom: 10%;
+    margin-bottom: 10%; 
     
     .create-user-h1 {
         color: #000;
+        text-align: center;
     }
     .new-user-image-container {
         width: $full-width;
-        height: 300px;
+        height: 350px;
         position: relative;
 
         @include flexStyling(column, space-evenly, center);
         .new-user-info-text { 
             position: relative;
+            .create-account-img-header {
+                text-align: center;
+            }
         }
 
     }
@@ -37,6 +41,7 @@
         width: $full-width;
         background-color: #FFF;
         @include flexStyling(column, center, center);
+        border-radius: 0px 0px 20px 20px;
 
         .input-email, .input-password, .input-repeat-password {
             @include flexStyling(column, flex-start, flex-start);
@@ -66,7 +71,8 @@
     }
 
     .go-back {
-        margin-bottom: 10%;
+        margin-top: 5%;
+        margin-bottom: 5%;
         color: #9C1A8B;
         font-weight: bolder;
     }   
@@ -74,6 +80,7 @@
 
 @include desktopsOnly() {
     .create-new-user-container {
+        width: 80%;
         @include flexStyling(row, center, stretch);    
 
         .new-user-image-container {

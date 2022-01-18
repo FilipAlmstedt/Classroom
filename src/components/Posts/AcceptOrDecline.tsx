@@ -64,7 +64,7 @@ export const AcceptOrDecline = () => {
             docSnap.id, 
             docSnap.data()?.title,
             docSnap.data()?.desc,
-            docSnap.data()?.comments, 
+            docSnap.data()?.completedPost, 
             docSnap.data()?.html,
             docSnap.data()?.css,
             docSnap.data()?.projectOwner,
@@ -82,7 +82,7 @@ export const AcceptOrDecline = () => {
         await setDoc(docRef, {
             html: post?.html,
             css: post?.css,
-            comments: post?.comments,
+            completedPost: post?.completedPost,
             date: post?.date,
             desc: post?.description,
             members: post?.members,

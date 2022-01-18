@@ -1,7 +1,7 @@
 .login-container {
     @include flexStyling(column, center, stretch);
     height: 80vh; 
-    width: 80%;
+    width: 90%;
     margin-top: 5%;
     margin-bottom: 10%;
 
@@ -27,7 +27,6 @@
         background-position: center;
         opacity: 0.6;
         border-radius: 20px 20px 0px 0px; 
-        
     }
 
 
@@ -49,7 +48,7 @@
             .input-email, .input-password {
                 @include flexStyling(column, flex-start, flex-start);
 
-                width: $full-width;
+                width: 80%;
                 padding: 10%;
 
                 .login-label {
@@ -57,19 +56,23 @@
                     font-size: 25px;
                     font-weight: bold;
                 }
-            
+                .forgot-password-link {
+                    margin: 0;
+                }
             }
             .login-btn {
                 cursor: pointer;
-                width: $full-width;
+                width: 80%;
                 height: 50px;
                 background-color: #47CF73;
                 border: none;
                 font-size: 17px;
                 border-radius: 10px;
             }
-            .register-link {
+            .register-link, .forgot-password-link {
                 color: #9C1A8B;
+                margin-top: 10%;
+                text-align: center;
                 font-weight: bolder;
             }
         }
@@ -79,6 +82,7 @@
 @include desktopsOnly() {
     .login-container {
         @include flexStyling(row, center, stretch);
+        width: 80%;
 
         .login-info-img {
             width: 50%;
@@ -86,13 +90,17 @@
         }
 
         .login-inputs-wrapper {
+            width: 50%;
+            border-radius: 0px 20px 20px 0px;
+            
             .login-inputs {
                 .login-btn {
                     width: $full-width;
                 }
+                .login-btn {
+                    width: 80%;
+                }
             }
-            width: 50%;
-            border-radius: 0px 20px 20px 0px;
             
         }
 

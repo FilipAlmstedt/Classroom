@@ -55,11 +55,11 @@ export const CreateNewPost = () => {
     // Create new post with stored states
     const createNewPost = async () => {
 
-        await addDoc(postsCollectionRef, {desc: desc , title: title, comments: [], css: cssCode, html: htmlCode, projectOwner: auth.currentUser?.email, members: [], date: Date.now(), pendingCollaborators: []}).catch((err) => {
+        await addDoc(postsCollectionRef, {desc: desc , title: title, completedPost: false, css: cssCode, html: htmlCode, projectOwner: auth.currentUser?.email, members: [], date: Date.now(), pendingCollaborators: []}).catch((err) => {
             console.log(err);
         });
         
-        navigate("/");
+        navigate("/show-posts");
     }
     
     return (

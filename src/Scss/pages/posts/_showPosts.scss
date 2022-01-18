@@ -30,10 +30,20 @@
             }
             .date-text {
                 color: #FFF;
+                font-size: 13px;
                 .owner-text {
                     color: #F2720C;
+                    font-size: 13px;
                 }
                 margin-bottom: 20px;
+            }
+            @include desktopsOnly() {
+                .date-text {
+                    font-size: 17px;
+                    .owner-text {
+                        font-size: 17px;
+                    }
+                }
             }
             
             .show-category-and-members-div {
