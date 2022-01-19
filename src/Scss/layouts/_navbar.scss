@@ -7,7 +7,7 @@
     background-size: cover;
     background-position: center;
 
-    a {
+    .nav-a {
         color: #FFF;
         text-decoration: none;
     }
@@ -26,7 +26,7 @@
         @include flexStyling(row, center, center);
         
         .logo {
-            background: url(../assets/icons/company_logo.png);
+            background: url(../assets/icons/company-logo.png);
             background-position: center;
             background-size: cover;
             width: 90px;
@@ -36,19 +36,25 @@
 
     .app-ul {
 
-        text-align: center;
         margin-top: 10px;
         margin-bottom: 10px;
+        text-align: center;
 
         @include desktopsOnly() {
             @include flexStyling(row, center, center);
         }   
+        .curren-user-p {
+            text-align: center;
+        }
        
         list-style: none;
         .app-li {
+            margin-top: 10px;
+            margin-bottom: 10px;
             @include desktopsOnly() {
                 margin-left: 5%;
                 margin-right: 5%;
+
                 width: 200px;
             }   
 

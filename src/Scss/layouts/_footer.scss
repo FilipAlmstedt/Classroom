@@ -21,6 +21,9 @@ footer {
         
         .footer-nav {
             @include flexStyling(row, center, center);
+            @include desktopsOnly() {
+                @include flexStyling(row, flex-start, center);
+            }
             .github-icon {
                 background-image: url(../assets/icons/github-icon.png);
                 background-size: cover;

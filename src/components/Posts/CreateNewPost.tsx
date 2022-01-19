@@ -25,7 +25,7 @@ export const CreateNewPost = () => {
     const [desc, setDesc] = useState("");
     const [title, setTitle] = useState("");
     const [htmlCode, setHtmlCode] = useState(
-        "<!--Insert your HTML code here-->\n<h1>The results will appear here!</h1>"
+        "<!--Insert your HTML code here-->\n<h1>The results will appear here! Please use classes/id:s for these projects or they will impact the ENTIRE site!!!</h1>"
     );
     const [cssCode, setCssCode] = useState(
         `/*Insert your CSS code here*/`
@@ -64,7 +64,7 @@ export const CreateNewPost = () => {
     
     return (
         <>  
-            <div className="create-new-post-container">
+            <div className="app-div create-new-post-container">
                 <h1 className="app-h1 create-post-page-h1">Create a new Post here!</h1>
                 
                 <div className="title-input">

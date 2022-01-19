@@ -424,6 +424,8 @@ export const EditPost = () => {
                         <input className="app-input" type="text" name="post-title" defaultValue={post?.title} hidden/>
                         <input className="app-input" type="text" name="owner" defaultValue={post?.owner} hidden/>
                         <input className="app-input" type="text" name="link" defaultValue={getURL} hidden/>
+                        <input className="app-input" type="text" name="css-code" defaultValue={post?.css} hidden/>
+                        <input className="app-input" type="text" name="html-code" defaultValue={post?.html} hidden/>
 
                         {allowedToEdit || memberAllowedToEdit
                         ? 

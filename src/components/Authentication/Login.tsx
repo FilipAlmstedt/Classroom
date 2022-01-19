@@ -15,7 +15,8 @@ export const Login = () => {
 
     const login = async () => {
         await signInWithEmailAndPassword(auth, email, password).then(() => {navigate("/");}).catch((err) => {
-            if(err.code === "auth/Invalid-email") {
+            
+            if(err.code === "auth/invalid-email") {
                 setEmailError("Invalid email! Please try again!");     
                 navigate("/login");       
             }
@@ -60,7 +61,7 @@ export const Login = () => {
                                     setEmail(event.target.value);
                                     }}
                                 />
-                                <p className="app-p error-msg">{emailError}</p>
+                                <p className="error-msg">{emailError}</p>
                             </div>
 
                             <div className="input-password">
@@ -74,7 +75,7 @@ export const Login = () => {
                                     setPassword(event.target.value);
                                     }}
                                 />
-                                <p className="app-p error-msg">{passwordError}</p>
+                                <p className="error-msg">{passwordError}</p>
                                 <Link className="forgot-password-link app-link" to="/forgot">Forgot your password?</Link>
                             </div>
                         

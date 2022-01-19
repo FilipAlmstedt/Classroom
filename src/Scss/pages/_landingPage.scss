@@ -67,6 +67,8 @@
         margin-bottom: 3%;
 
         .about-website-info {
+            width: 90%;
+
             .about-website-info-h1 {
                 font-size: 20px;
                 text-align: center;
@@ -74,6 +76,42 @@
                     font-size: 30px;
                 }
             }
+
+            .landing-hr-line {
+                @include flexStyling(column, center, center);      
+                margin-top: 3%;
+                margin-bottom: 3%;
+
+                .hr-line {
+                    width: $full-width;
+                }
+            }
+            .info-div-functions {
+                @include flexStyling(column, center, center);  
+                
+                margin-bottom: 2%;
+
+                @include desktopsOnly() {
+                    @include flexStyling(row, flex-start, center);  
+                }
+
+                .info-text, .info-div-img {
+                 
+                    width: $full-width;
+                    @include desktopsOnly() {
+                        width: 50%;
+                    }
+                    .info-text-p {
+                        margin-top: 20px;
+                        line-height: 1.75;
+                        .orange {
+                            color: #F2720C;
+                        }
+                    }
+                }
+               
+            }
+            
         }
 
         .framework-h2 {
@@ -86,7 +124,7 @@
 
         .show-frameworks-div {
             @include flexStyling(column, center, center);
-            width: $full-width;
+            width: 50%;
             
             @include desktopsOnly() {
                 @include flexStyling(row, space-evenly, center);
