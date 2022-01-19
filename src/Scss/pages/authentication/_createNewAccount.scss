@@ -86,14 +86,14 @@
 
         .new-user-image-container {
             width: 50%;
-            height: 70vh;
+            height: 700px;
         }
         .new-user-image-container::before {
             border-radius: 20px 0px 0px 20px;
         }
         .inputs-container {
             width: 50%;
-            height: 70vh;
+            height: 700px;
             border-radius: 0px 20px 20px 0px;
 
             .input-email, .input-password, .input-repeat-password {
