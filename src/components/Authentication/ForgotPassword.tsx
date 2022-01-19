@@ -1,5 +1,6 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { auth } from "../../firebase";
 
 export const ForgotPassword = () => {
@@ -25,7 +26,7 @@ export const ForgotPassword = () => {
             setErrorUserNotFound("This email address doesn't exist! Try another email!")
         }
         if(err.code === "auth/missing-email") {
-            setErrorUserNotFound("Empty! Please Type in an email")
+            setErrorUserNotFound("Empty! Please Type in an email address!")
         }
             
         });
@@ -33,20 +34,34 @@ export const ForgotPassword = () => {
 
     return (
         <>
-            <h1>Forgot Password</h1>
+            <div className="forgot-password-container">
+                
+                <div className="icon-and-h1">
+                    <div className="question-mark-icon"></div>
+                    <h1 className="app-h1 forgot-h1">Forgot Your Password?</h1>
+                </div>
 
-            <input
-                type="text"
-                placeholder="Type in your email so we can reset the password"
-                onChange={(event) => {
-                    setEmail(event.target.value);
-                }}
-            />
-            <p className="success-msg">{success}</p>
-            <p className="error-msg">{errorUserNotFound}</p>
-            
+                <div className="input-container">
 
-            <button onClick={sendEmail}>Reset Password</button>
+                    <p className="input-container-p">Please type in your email so we can reset your email.</p>
+
+                    <label className="app-label forgot-label" htmlFor="reset-password">Email:</label>
+                    <input
+                        id="reset-password"
+                        className="app-input"
+                        type="text"
+                        placeholder="Your email address..."
+                        onChange={(event) => {
+                            setEmail(event.target.value);
+                        }}
+                    />
+                    <p className="success-msg">{success}</p>
+                    <p className="error-msg">{errorUserNotFound}</p>
+                </div>
+
+                <button className="reset-password-btn" onClick={sendEmail}>Reset Password</button>
+                <Link className="app-link go-back" to="/login">Go Back!</Link>
+            </div>
         </>
     );
 }

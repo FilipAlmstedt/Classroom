@@ -4,3 +4,9 @@
 .success-msg {
     color: rgb(0, 255, 76);
 }
+.info-msg {
+    color: rgb(9, 174, 250);
+}
+.error-msg, .success-msg, .info-msg {
+    font-weight: bold;
+}

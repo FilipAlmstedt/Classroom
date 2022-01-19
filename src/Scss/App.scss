@@ -1,9 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
+
+@import "./utilities/variables/variables";
+
+@import "./utilities/mixins";
 @import "./utilities/base";
 @import "./utilities/error";
+@import "./utilities/pagination";
 
-@import "./layout/navbar";
+@import "./layouts/navbar";
+@import "./layouts/footer";
 
 @import "./pages/landingPage";
-@import "./pages/login";
+@import "./pages/authentication/login";
+@import "./pages/authentication/createNewAccount";
+@import "./pages/authentication/forgotPassword";
+@import "./pages/authentication/resetPassword";
+@import "./pages/posts/createNewPost";
+@import "./pages/posts/editPosts";
+@import "./pages/posts/acceptOrDecline";
 @import "./pages/showPostedCode";
-@import "./pages/createNewPost";
+@import "./pages/posts/showPosts";

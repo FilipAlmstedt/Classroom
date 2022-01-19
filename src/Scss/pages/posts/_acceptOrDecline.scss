@@ -1,0 +1,52 @@
+.accept-or-decline-container {
+    @include flexStyling(column, space-evenly, center);
+    padding: 1%;
+    height: 90%;
+    background-color: #FFF;
+    border-radius: 20px;
+    .accept-or-decline-text-container {
+        @include flexStyling(column, center, center);
+
+        .add-collaborator-icon {
+            width: 128px;
+            height: 128px;
+            background: url(../../assets/icons/3643746_add_friend_member_people_plus_icon.png);
+        }
+        .accept-or-decline-p {
+            font-size: 20px;
+        }
+    }
+
+    .error-div {
+        @include flexStyling(column, center, center);
+        padding: 10%;
+    }
+
+    .accept-or-decline-btns {
+        @include flexStyling(row, center, center);
+
+        .decline-btn, .accept-btn {
+            cursor: pointer;
+            border: none;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 20px;
+            color: #FFF;
+            font-weight: bold;
+        }
+
+        .decline-btn {
+            background-color: red;         
+        }
+        .accept-btn {
+            background-color: green;
+        }
+    }
+}
+@include desktopsOnly() {
+    .accept-or-decline-container {
+        width: 500px;
+        height: 70%;
+        padding: 10%;
+    }
+}

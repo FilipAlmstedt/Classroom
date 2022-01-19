@@ -1,0 +1,104 @@
+.show-posts-container {
+
+    width: 85%;
+    min-height: 100vh;
+
+    margin-bottom: 5%;
+
+    @include flexStyling(column, flex-start, center);
+
+    .page-header {
+        margin-top: 5%;
+        width: $full-width;
+        margin-bottom: 20px;
+    }
+
+    .show-all-posts-container {
+        width: $full-width;
+        position: relative;
+        @include flexStyling(column, center, center);
+    
+        .post-div {
+            text-decoration: none;
+            position: relative;
+            width: 90%;
+            padding: 1%;
+            .post-title-header {
+                color: #F2720C;
+                margin-bottom: 20px;
+                text-decoration: none;
+            }
+            .date-text {
+                color: #FFF;
+                font-size: 13px;
+                .owner-text {
+                    color: #F2720C;
+                    font-size: 13px;
+                }
+                margin-bottom: 20px;
+            }
+            @include desktopsOnly() {
+                .date-text {
+                    font-size: 17px;
+                    .owner-text {
+                        font-size: 17px;
+                    }
+                }
+            }
+            
+            .show-category-and-members-div {
+                @include flexStyling(row, space-between, center);
+                .show-category-div {
+                    @include flexStyling(row, space-between, center);
+                    margin-top: 1%;
+                    width: 30%;
+
+                    .category-icons {
+                        width: 40px;
+                        height: 40px;
+                    }
+                    .category-icon-css {
+                        background-image: url(../../assets/icons/css-icon.png);
+                        background-size: cover;
+                        background-position: center;
+                    }
+                    .category-icon-html {
+                        background-image: url(../../assets/icons/html-icon.png);
+                        background-size: cover;
+                        background-position: center;
+                    }
+                }
+                @include desktopsOnly() {
+                    .show-category-div {
+                        width: 6%;
+                    }
+                }
+                .collaborator-info {
+                    .member-info {
+                        color: #F2720C;
+                    }
+                }
+            }
+
+            .app-hr {
+                margin-top: 30px;
+                color: #000;
+            }
+            
+        }
+    }
+    .show-all-posts-container::before {
+        content: '';
+        background-image: url(../../assets/images/ekaterina-novitskaya-gLroHoWh_as-unsplash.jpg);
+        background-size: cover;
+        background-position: center;
+        opacity: 0.3;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 20px;
+    }
+
+}

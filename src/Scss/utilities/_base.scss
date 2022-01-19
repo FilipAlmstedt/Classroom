@@ -2,6 +2,60 @@
     padding: 0;
     margin: 0;
 }
+html {
+    scroll-behavior: smooth;
+}
+body {
+    width: $full-width;
+}
 .App {
-    height: 100vh;
+    @include flexStyling(column, space-between, center);
+    overflow-x: hidden;
+    background-color: #1B1C24; 
+}
+.base-wrapper {
+    height: 100vh; 
+    @include flexStyling(column, center, center);
+}
+
+// ! IMPORTANT
+/* 
+These are base elements needs their own classes because users might 
+style their own on a component and if they style a normal element 
+without a class it will spread to other elements on the app so 
+these will prevent it.
+*/
+
+.app-h1, .app-h2, .app-h3, .app-h4 {
+    color: #FFF;
+    font-family: 'Roboto Mono', monospace;
+    text-align: left;
+}
+
+// Paragraph
+.app-p, .app-label, .app-link  {
+    color: #FFF;
+    text-align: left;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: normal;
+    font-size: medium;
+}
+
+.app-input {
+    border: none;
+    width: 100%;
+    height: 40px;
+    box-shadow: 0px 4px 0px #DDD;
+    background-color: rgb(196, 196, 196);
+    color: #000;
+    transition: box-shadow 0.5s ease-in-out;
+    margin-bottom: 4px;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.app-div {
+    width: 100%;
+    height: 100%;
+    border: none;
 }

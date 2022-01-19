@@ -1,0 +1,62 @@
+footer {
+    @include flexStyling(row, space-evenly, center);
+    color: #FFF;
+    width: $full-width;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    position: relative;
+
+    .footer-container {
+        position: relative;
+        @include flexStyling(column, space-between, center);
+        width: 95%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+
+        @include desktopsOnly() {
+            @include flexStyling(row, space-between, center);
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-nav {
+            @include flexStyling(row, center, center);
+            @include desktopsOnly() {
+                @include flexStyling(row, flex-start, center);
+            }
+            .github-icon {
+                background-image: url(../assets/icons/github-icon.png);
+                background-size: cover;
+                width: 30px;
+                height: 30px;
+                margin-right: 10px;
+            }
+            .github-link {
+                .github-link-p {
+                    text-align: center;
+                }
+            }
+        }
+        .footer-info {
+            @include flexStyling(column, flex-end, flex-end);
+            margin-top: 30px;
+            margin-bottom: 30px;
+            .motto {
+                font-size: 15px;
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
+footer::before {
+    content: '';
+    background-image: url(../assets/images/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0.4;
+}

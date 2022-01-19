@@ -9,9 +9,14 @@ const config = {
         measurementId: process.env.REACT_APP_MEASUREMENTID
     },
     emailJSConfig: {
-        serviceId: process.env.REACT_APP_SERVICEID,
-        templateId: process.env.REACT_APP_TEMPLATEID,
-        userId: process.env.REACT_APP_USERID
+        serviceIdGmail: process.env.REACT_APP_SERVICEID_GMAIL,
+        serviceIdOutlook: process.env.REACT_APP_SERVICEID_OUTLOOK,
+        templateIdEditRequest: process.env.REACT_APP_TEMPLATEID_EDIT_REQUEST,
+        userId: process.env.REACT_APP_USERID,
+        templateIdInviteAccepted: process.env.REACT_APP_TEMPLATEID_INVITE_ACCEPTED,
+        templateIdInviteDeclined: process.env.REACT_APP_TEMPLATEID_INVITE_DECLINED,
+        templateIdCollaboratorEdits: process.env.REACT_APP_TEMPLATEID_COLLABORATOR_EDITS,
+        templateIdPostIsCompleted: process.env.REACT_APP_TEMPLATEID_POST_IS_COMPLETED
     }
 }
 

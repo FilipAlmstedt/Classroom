@@ -1,0 +1,14 @@
+//For use with responsive desktop displays
+@mixin desktopsOnly {
+    @media screen and (min-width: 1024px) {
+        @content;
+    }
+}
+
+//Created to recyle flex-styling, arguments for direction and justify-content
+@mixin flexStyling($direction, $justifyContent, $alignItems) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+}

@@ -10,17 +10,19 @@ import { ResetPassword } from "./components/Authentication/ResetPassword";
 import { CreateNewPost } from "./components/Posts/CreateNewPost";
 import { EditPost } from "./components/Posts/EditPost";
 import { AcceptOrDecline } from "./components/Posts/AcceptOrDecline";
-
+import { ShowPosts } from "./components/Posts/ShowPosts";
+import { PageNotFound } from "./components/PageNotFound";
 
 function App() {
 
+  const url = window.location.href;
   
   return (
     <>
       <div className="App">
         <Router>
          
-          <Navbar></Navbar>
+          {!url.includes("accept-or-decline") ? <Navbar></Navbar>: null}
 
           <Routes>
 
@@ -30,12 +32,14 @@ function App() {
             <Route path="/forgot" element={<ForgotPassword/>} />
             <Route path="/reset-password" element={<ResetPassword/>} />
             <Route path="/create-new-post" element={<CreateNewPost/>} />
+            <Route path="/show-posts" element={<ShowPosts/>} />
             <Route path="/edit-post/:id" element={<EditPost/>} /> 
             <Route path="/accept-or-decline/:id" element={<AcceptOrDecline/>} />
+            <Route path="*" element={<PageNotFound/>}/>
 
           </Routes>
 
-          <Footer></Footer>
+          {!url.includes("accept-or-decline") ? <Footer></Footer>: null}
 
         </Router>
       </div>

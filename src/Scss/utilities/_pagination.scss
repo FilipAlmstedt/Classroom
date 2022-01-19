@@ -1,0 +1,33 @@
+.pagination-btns {
+    width: 80%;
+    margin-top: 10px;
+    height: 40px;
+
+    list-style: none;
+
+    @include flexStyling(row, center, center);
+
+    a {
+        cursor: pointer;
+        color: #FFF;
+        padding: 10px;
+        margin: 8px;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: 0.2s ease-in-out;
+        font-family: 'Roboto Mono', monospace;
+        
+        &:hover {
+            color: white;
+            background-color: #F2720C;
+            transition: .2s ease-in-out;
+        }
+    }
+}
+.pagination-active {
+    a {
+        color: white;
+        background-color: #F2720C;
+        transition: .2s ease-in-out;
+    }
+}

@@ -1,0 +1,112 @@
+.create-new-post-container {
+    width: $full-width;
+    margin-top: 10%;
+    @include flexStyling(column, center, center);
+
+    .create-post-page-h1 {
+        text-align: center;
+    }
+
+    .title-input {
+        margin-top: 2%;
+        margin-bottom: 2%;
+        width: 80%;
+        .app-input {
+            width: $full-width;
+            height: 50px;
+            border-radius: 10px;
+        }
+    }
+
+    
+    .desc-and-code-container {
+        width: $full-width; 
+        height: 100%;
+        @include flexStyling(column, center, center);
+        .textarea-desc {
+            width: 95%;
+            height: 300px;
+            margin: 5px;
+            
+
+            .app-textarea {
+                width: $full-width;
+                height: $full-height;
+                resize: none;
+                background-image: url(../../assets/images/ekaterina-novitskaya-gLroHoWh_as-unsplash.jpg);
+                background-size: cover;
+                color: #FFF;
+                font-size: 15px;
+                font-weight: bold;
+                font-family: 'Roboto Mono', monospace;
+            }
+        }
+
+        .code-editor {
+            width: 95%;
+            margin: 50px 5px 50px 5px ;
+            height: 300px;
+
+            .label-and-icon {
+                @include flexStyling(row, flex-start, center);
+                .html-icon, .css-icon {
+                    width: 30px;
+                    height: 30px;
+                    background-size: cover;
+                }
+                .html-icon {
+                    background-image: url(../../assets/icons/html-icon.png);
+                }
+                .css-icon {
+                    background-image: url(../../assets/icons/css-icon.png);
+                }
+            }
+
+            .ace-editor {
+                overflow-y: auto;
+            }
+        }
+    }
+    .create-new-post-btn {
+        cursor: pointer;
+        margin-top: 2%;
+        margin-bottom: 2%;
+
+        border: none;
+        border-radius: 10px;
+        padding: 10px;
+    }
+
+}
+@include desktopsOnly() {
+    .create-new-post-container {
+
+        margin-top: 1%;
+
+        .title-input {  
+            width: 35%;
+        }
+
+        .desc-and-code-container {
+            height: 400px;
+            @include flexStyling(row, center, center);
+            width: $full-width;
+            .textarea-desc {
+                width: 33%;    
+            }
+
+            .coding-input-container {
+                @include flexStyling(row, center, center);
+            }
+        }
+        .code-editor {
+            width: 33% !important;
+            margin: 5px;
+        }
+    }
+}
+
+
+.textarea-desc {
+    width: $full-width;
+}

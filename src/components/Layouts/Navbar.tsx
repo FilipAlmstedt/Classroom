@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { useEffect } from "react";
 import { useState } from "react";
 
+
 export const Navbar = () => {
     
     const navigate = useNavigate();
@@ -25,18 +26,26 @@ export const Navbar = () => {
     const logout = async () => {
         localStorage.setItem("loggedInUser", "");
         await signOut(auth);
-        navigate("/")
+        navigate("/");
     };
     
     return (
         <>
-            <header>
-                <Link to="/"><h2>Classroom</h2></Link>
-                <nav>
-                    <ul>
-                    {checkUserLoggedIn ? <div onClick={logout}><li>Log out</li></div>: <Link to="/login"><li>Log in</li></Link>}
-                    {checkUserLoggedIn ? <li><Link to="/create-new-post">Create new Post</Link></li>: null}
-                    {checkUserLoggedIn ? <p>Welcome {auth.currentUser?.email}</p>: null}
+            <header className="app-header">
+                <Link className="app-link nav-a" to="/">
+                    <div className="logo-container">
+                        <div className="logo"></div>
+                        <h2 className="header-title app-h2"> 
+                            Classroom 
+                        </h2>
+                    </div>
+                </Link>
+                <nav className="app-navbar">
+                    <ul className="app-ul">
+                        {checkUserLoggedIn ? <p className="app-p curren-user-p">Current User: {auth.currentUser?.email}</p>: null}
+                        <li className="app-li"><Link className="app-link nav-a" to="/show-posts">Show Posts</Link></li>
+                        {checkUserLoggedIn ? <li className="app-li"><Link className="app-link nav-a" to="/create-new-post">Create new Post</Link></li>: null}
+                        {checkUserLoggedIn ? <div className="log-out-div" onClick={logout}><li className="app-li"><Link className="app-link nav-a" to="">Log out</Link></li></div>: <li className="app-li"><Link className="app-link nav-a" to="/login">Log in</Link></li>}
                     </ul>
                 </nav>
             </header>

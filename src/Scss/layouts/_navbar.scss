@@ -1,0 +1,66 @@
+.app-header {
+    min-height: 10vh;
+    color: #FFF;
+    width: 100%;
+    box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.9);
+    background-image: url(../assets/images/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    background-size: cover;
+    background-position: center;
+
+    .nav-a {
+        color: #FFF;
+        text-decoration: none;
+    }
+
+    @include flexStyling(column, center, center);
+
+    
+    @include desktopsOnly() {
+        @include flexStyling(row, space-between, center);
+        .logo-container {
+            margin-left: 5%;
+        }
+    }   
+
+    .logo-container {
+        @include flexStyling(row, center, center);
+        
+        .logo {
+            background: url(../assets/icons/company-logo.png);
+            background-position: center;
+            background-size: cover;
+            width: 90px;
+            height: 90px;
+        }
+    }
+
+    .app-ul {
+
+        margin-top: 10px;
+        margin-bottom: 10px;
+        text-align: center;
+
+        @include desktopsOnly() {
+            @include flexStyling(row, center, center);
+        }   
+        .curren-user-p {
+            text-align: center;
+        }
+       
+        list-style: none;
+        .app-li {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            @include desktopsOnly() {
+                margin-left: 5%;
+                margin-right: 5%;
+
+                width: 200px;
+            }   
+
+            a {
+                color: white;
+            }
+        }
+    }
+}

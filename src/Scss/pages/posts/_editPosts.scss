@@ -1,0 +1,182 @@
+.edit-post-container {
+    width: $full-width;
+    margin-top: 1%;
+    margin-bottom: 3%;
+    @include flexStyling(column, center, center);
+
+    .ace-editor-edit-disabled {
+        opacity: 0.3;
+    }
+
+    .status-div, .post-status-ongoing {
+        @include flexStyling(row, center, center);
+        width: 100%;
+        margin: 20px 40px 20px 40px;
+        .checkmark-icon {
+            background-image: url(../../assets/icons/checkbox-icon.png);
+            background-size: cover;
+            background-position: center;
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+        }
+    }
+    @include desktopsOnly() {
+        .status-div, .post-status-ongoing {
+            @include flexStyling(row, flex-start, center);
+            margin: 20px 0px 0px 40px;
+        }
+    }
+
+    .post-info-div {
+        @include flexStyling(column, center, center);
+        margin: 5px 15px 15px 15px;
+        width: 98%;
+        .title-and-date-div {
+            .title-and-date-h1, .title-and-date-text {
+                text-align: center;
+            }
+
+            width: $full-width;
+            .post-owner {
+                color: #F2720C;
+            }
+           
+            .post-status {
+                @include flexStyling(column, center, center);
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+        }
+        .show-collaborators-div {
+            padding-top: 40px;
+            width: $full-width;
+        }
+    }
+
+    .edit-post-hr-line-div {
+        @include flexStyling(column, center, center);
+        width: 98%;
+    
+        .edit-post-hr-line { 
+            width: 100%;
+        }
+    }
+        
+    .hidden-emailJS-form {
+        margin: 10px 0px 10px 25px;
+        width: $full-width;
+        @include flexStyling(column, flex-start, flex-start);
+        .send-request-div, .send-solved-problem-div {
+            .send-request-to-edit-btn, .is-problem-solved-btn  {
+                cursor: pointer;
+                margin-top: 10px;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .desc-and-code-container {
+    
+        @include flexStyling(column, center, center);
+        .desc {
+            width: $full-width;
+            height: 332px;
+            background-image: url(../../assets/images/ekaterina-novitskaya-gLroHoWh_as-unsplash.jpg);
+            background-size: cover;
+            border-radius: 10px;
+
+            .desc-label {
+                margin-left: 10px;
+            }
+            .desc-text {
+                margin: 10px;
+            }
+        }
+    }
+    .update-btn-container {
+        @include flexStyling(column, center, center);
+        margin-top: 3%;
+        margin-bottom: 3%;
+        text-align: center !important;
+
+        .update-btn {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+    }
+
+    .code-editor {
+        width: 100%;
+        height: 100%;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        .ace-editor {
+            overflow-y: auto;
+        }
+        .label-and-icon {
+            @include flexStyling(row, flex-start, center);
+            .html-icon, .css-icon {
+                width: 30px;
+                height: 30px;
+                background-size: cover;
+            }
+            .html-icon {
+                background-image: url(../../assets/icons/html-icon.png);
+            }
+            .css-icon {
+                background-image: url(../../assets/icons/css-icon.png);
+            }
+            
+        }
+    }
+
+    @include desktopsOnly() {
+
+        .post-info-div {
+            .title-and-date-div {
+                width: $full-width;
+
+                .title-and-date-h1, .title-and-date-text {
+                    text-align: left !important;
+                }
+                .post-status {
+                    @include flexStyling(column, center, flex-start);
+                }
+            }
+           
+            @include flexStyling(row, space-between, flex-start);
+            .show-collaborators-div {
+                @include flexStyling(column, flex-end, flex-end);
+                padding-top: 0;
+                .show-collaborators {
+                    @include flexStyling(column, flex-start, flex-start);
+                }
+            }
+        }
+        .desc-and-code-container {
+            @include flexStyling(column, center, stretch);
+            width: $full-width;
+            
+                @include flexStyling(row, center, stretch);
+                .desc {
+                    margin: 5px;
+                    width: 33%;
+                    overflow-y: auto;
+                }
+                .code-editor {
+                    width: 33%;
+                    margin: 5px;
+                }
+            
+                
+    
+        }
+
+    }
+}
