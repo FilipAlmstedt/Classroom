@@ -143,10 +143,10 @@ export const EditPost = () => {
         if(post) {
             if(post.members.length !== 0) {
                 
+                // eslint-disable-next-line array-callback-return
                 post.members.map((member) => {
                     // ! e.target[0] = collaborator
                     e.target[0].defaultValue = member;
-                    //console.log(e.target[0].defaultValue);
                     
                     let serviceId = "";
                     if(member.search("gmail") !== -1) {

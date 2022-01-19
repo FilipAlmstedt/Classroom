@@ -1,13 +1,14 @@
 .create-new-user-container {
 
     @include flexStyling(column, center, stretch);
-    height: 80vh; 
     width: 90%;
+    height: $full-height; 
     margin-top: 5%;
     margin-bottom: 10%; 
     
     .create-user-h1 {
         color: #000;
+        margin-top: 3%;
         text-align: center;
     }
     .new-user-image-container {
@@ -85,14 +86,14 @@
 
         .new-user-image-container {
             width: 50%;
-            height: $full-height;
+            height: 70vh;
         }
         .new-user-image-container::before {
             border-radius: 20px 0px 0px 20px;
         }
         .inputs-container {
             width: 50%;
-            height: $full-height;
+            height: 70vh;
             border-radius: 0px 20px 20px 0px;
 
             .input-email, .input-password, .input-repeat-password {

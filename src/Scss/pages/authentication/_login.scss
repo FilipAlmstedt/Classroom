@@ -1,7 +1,7 @@
 .login-container {
     @include flexStyling(column, center, stretch);
-    height: 80vh; 
     width: 90%;
+    height: $full-height; 
     margin-top: 5%;
     margin-bottom: 10%;
 
@@ -86,7 +86,7 @@
 
         .login-info-img {
             width: 50%;
-            height: $full-height;
+            height: 80vh;
         }
 
         .login-inputs-wrapper {

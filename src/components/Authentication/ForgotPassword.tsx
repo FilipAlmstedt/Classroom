@@ -60,7 +60,7 @@ export const ForgotPassword = () => {
                 </div>
 
                 <button className="reset-password-btn" onClick={sendEmail}>Reset Password</button>
-                <Link to="/login">Go Back!</Link>
+                <Link className="app-link go-back" to="/login">Go Back!</Link>
             </div>
         </>
     );

@@ -15,8 +15,12 @@ export const Login = () => {
 
     const login = async () => {
         await signInWithEmailAndPassword(auth, email, password).then(() => {navigate("/");}).catch((err) => {
-            if(err.code === "auth/Invalid-email" || "auth/user-disabled" || "auth/user-not-found") {
+            if(err.code === "auth/Invalid-email") {
                 setEmailError("Invalid email! Please try again!");     
+                navigate("/login");       
+            }
+            if(err.code === "auth/user-disabled" || err.code === "auth/user-not-found") {
+                setEmailError("User doesn't exists! Please try again!");     
                 navigate("/login");       
             }
             if(err.code === "auth/wrong-password") {
