@@ -91,7 +91,7 @@ export const ShowPosts = () => {
     return (
         <>
             {!loading ?
-            <div className="show-posts-container">
+            <main className="show-posts-container">
                 
                 <div className="page-header">
                     <h1 className="app-h1">Top Recent Problems</h1>
@@ -113,11 +113,11 @@ export const ShowPosts = () => {
                     disabledClassName={"pagniation-disabled"}
                     activeClassName={"pagination-active"}
                 />
-            </div>
+            </main>
             : 
-            <div className="base-wrapper">
+            <main className="base-wrapper">
                 <h1 className="app-h1">Loading...</h1>
-            </div>
+            </main>
             }
         </>
     );

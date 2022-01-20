@@ -103,7 +103,7 @@ export const AcceptOrDecline = () => {
     return (
 
         <>
-            <div className="base-wrapper">
+            <main className="base-wrapper">
 
                 <div className="accept-or-decline-container">
                     
@@ -143,7 +143,7 @@ export const AcceptOrDecline = () => {
                     </div>
                 </div>
 
-            </div>
+            </main>
         </>
     );
 }

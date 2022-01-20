@@ -46,7 +46,7 @@ export const ResetPassword = () => {
 
     return (
         <>
-            <div className="reset-password-container">
+            <main className="reset-password-container">
                 
                 
                 <div className="inputs-container">
@@ -92,7 +92,7 @@ export const ResetPassword = () => {
                 </div>
 
 
-            </div>
+            </main>
         </>
     );
 }

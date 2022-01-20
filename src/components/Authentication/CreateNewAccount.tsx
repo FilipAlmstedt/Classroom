@@ -37,7 +37,7 @@ export const CreateNewAccount = () => {
 
     return (
 
-      <div className="create-new-user-container">
+      <main className="create-new-user-container">
 
         <div className="new-user-image-container">
           <div className="new-user-info-text">
@@ -96,7 +96,7 @@ export const CreateNewAccount = () => {
 
           <Link className="app-link go-back" to="/login">Go Back</Link>
         </div>
-      </div>
+      </main>
 
     );
 }

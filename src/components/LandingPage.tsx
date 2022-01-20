@@ -2,7 +2,7 @@ export const LandingPage = () => {
 
     return (
         <>
-            <div className="landing-page-container">
+            <main className="landing-page-container">
                 <div className="hero-img">
                     <div className="hero-img-text">
                         <h1 className="hero-h1 app-h1">WELCOME TO CLASSROOM</h1>
@@ -108,7 +108,7 @@ export const LandingPage = () => {
                     </div>
                 </div>
                 
-            </div>
+            </main>
         </>
     );
 }

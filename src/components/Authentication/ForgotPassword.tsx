@@ -34,7 +34,7 @@ export const ForgotPassword = () => {
 
     return (
         <>
-            <div className="forgot-password-container">
+            <main className="forgot-password-container">
                 
                 <div className="icon-and-h1">
                     <div className="question-mark-icon"></div>
@@ -61,7 +61,7 @@ export const ForgotPassword = () => {
 
                 <button className="reset-password-btn" onClick={sendEmail}>Reset Password</button>
                 <Link className="app-link go-back" to="/login">Go Back!</Link>
-            </div>
+            </main>
         </>
     );
 }

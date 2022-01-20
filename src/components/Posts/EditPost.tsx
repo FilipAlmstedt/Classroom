@@ -41,9 +41,12 @@ export const EditPost = () => {
     const [successfulUpdateMsg, setSuccessfulUpdateMsg] = useState("");
     const [error, setError] = useState("");
  
+    /* I couldn't get it to work with typescript. The docs of EmailJS
+    uses React and they don't specify the type of e. It will use any until
+    I figured it out */
     const sendEditRequestMail = (e: any) => {  
         e.preventDefault();
-    
+        
         if(post) {    
             if(post.pendingCollaborators.length !== 0) {
                 // eslint-disable-next-line array-callback-return
@@ -103,6 +106,9 @@ export const EditPost = () => {
         }
     };
 
+    /* I couldn't get it to work with typescript. The docs of EmailJS
+    uses React and they don't specify the type of e. It will use any until
+    I figured it out */
     const sendCollaboratorEditMail = (e: any) => {
         e.preventDefault();
         if(post?.owner !== auth.currentUser?.email) {
@@ -137,6 +143,9 @@ export const EditPost = () => {
         }
     }
 
+    /* I couldn't get it to work with typescript. The docs of EmailJS
+    uses React and they don't specify the type of e. It will use any until
+    I figured it out */
     const sendSolvedProblemMail = (e: any) => {
         
         e.preventDefault();
@@ -145,7 +154,7 @@ export const EditPost = () => {
                 
                 // eslint-disable-next-line array-callback-return
                 post.members.map((member) => {
-                    // ! e.target[0] = collaborator
+                    // ! e.target[0] = current collaborator
                     e.target[0].defaultValue = member;
                     
                     let serviceId = "";
@@ -265,7 +274,7 @@ export const EditPost = () => {
     return (
 
         <>
-            <div className="edit-post-container">
+            <main className="edit-post-container">
             { post?.completedPost ? <div className="app-div status-div"><div className="checkmark-icon"></div><h4 className="post-status app-h4">Solved</h4></div> : <h4 className="post-status-ongoing app-h4">Ongoing problem...</h4>}
                 <div className="post-info-div">
                
@@ -448,7 +457,7 @@ export const EditPost = () => {
                         <ShowPostedCode htmlCode={newHtml} cssCode={newCss}/>
                     </div>
                 </div>
-            </div>
+            </main>
             
         </>
 

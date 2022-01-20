@@ -13,11 +13,11 @@ export const ShowPostedCode = (props: ICodeInput) => {
         <>
             <style>{props.cssCode}</style>
 
-            <div className="code-result-wrapper">
+            <main className="code-result-wrapper">
                 <div className="code-container">
                     <ReactMarkdown rehypePlugins={[rehypeRaw]} children={props?.htmlCode || ""} />
                 </div>
-            </div>
+            </main>
         </>
 
 

@@ -64,7 +64,7 @@ export const CreateNewPost = () => {
     
     return (
         <>  
-            <div className="app-div create-new-post-container">
+            <main className="app-div create-new-post-container">
                 <h1 className="app-h1 create-post-page-h1">Create a new Post here!</h1>
                 
                 <div className="title-input">
@@ -128,12 +128,12 @@ export const CreateNewPost = () => {
                 <button className="create-new-post-btn" onClick={checkIfInputsAreEmpty}>Create Post!</button>
               
 
-            </div>
-            <div className="result-frame-container">
+            </main>
+            <main className="result-frame-container">
                     <div className="result-frame">
                         <ShowPostedCode htmlCode={htmlCode} cssCode={cssCode}/>
                     </div>
-            </div>
+            </main>
         </>
     );
 }
