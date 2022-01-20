@@ -47,8 +47,7 @@ export const ResetPassword = () => {
     return (
         <>
             <main className="reset-password-container">
-                
-                
+
                 <div className="inputs-container">
 
                     <div className="unlocked-icon"></div>
@@ -85,8 +84,6 @@ export const ResetPassword = () => {
                     <p className="error-msg">{passwordNotMatched}</p>
                     {expiredTime ? <p className="error-msg">Time has expired! <Link to="/forgot">Go back</Link></p>: null}
                     </div>
-
-
 
                     <button className="reset-password-btn" onClick={resetPassword}>Reset Password</button>
                 </div>
