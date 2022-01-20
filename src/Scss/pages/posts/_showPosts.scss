@@ -23,10 +23,32 @@
             position: relative;
             width: 90%;
             padding: 1%;
+
+            .status-div, .post-status-ongoing {
+                @include flexStyling(row, flex-start, center);
+                width: 100%;
+                margin-top: 20px; 
+                margin-bottom: 20px;
+                .checkmark-icon {
+                    background-image: url(../../assets/icons/checkbox-icon.png);
+                    background-size: cover;
+                    background-position: center;
+                    width: 25px;
+                    height: 25px;
+                    margin-right: 10px;
+                }
+            }
+
+           
+
             .post-title-header {
                 color: #F2720C;
                 margin-bottom: 20px;
                 text-decoration: none;
+                transition: 0.5s ease-in-out;
+                &:hover {
+                    color: #09AEFA;
+                }
             }
             .date-text {
                 color: #FFF;

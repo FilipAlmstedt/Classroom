@@ -31,10 +31,14 @@ footer {
                 height: 30px;
                 margin-right: 10px;
             }
-            .github-link {
-                .github-link-p {
-                    text-align: center;
-                }
+            .github-link, .github-link-p {
+                color: #FFF;
+                text-align: center;
+                transition: 0.5s ease-in-out;
+
+                &:hover {
+                    color: #09AEFA;
+                } 
             }
         }
         .footer-info {

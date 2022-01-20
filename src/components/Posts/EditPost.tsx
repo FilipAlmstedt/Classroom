@@ -299,7 +299,7 @@ export const EditPost = () => {
 
                 <div className="hidden-emailJS-form">
                     
-                    {/*  */}
+                    
                     {
                     allowedToEdit ? 
                     <div className="app-div send-solved-problem-div">
@@ -445,7 +445,7 @@ export const EditPost = () => {
                         </div> 
                         : 
                         <div className="app-div update-btn-with-error-msg">
-                            <button className="update-btn" disabled>Update and save!</button>
+                            <button className="update-btn disabled" disabled>Update and save!</button>
                         </div>}
                     </form>
                 </div>   

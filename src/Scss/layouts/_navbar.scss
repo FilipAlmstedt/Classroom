@@ -7,12 +7,12 @@
     background-size: cover;
     background-position: center;
 
-    .nav-a {
+    .nav-a, .header-title {
         color: #FFF;
         text-decoration: none;
         transition: 0.5s ease-in-out;
         &:hover {
-            color: orangered;
+            color: #09AEFA;
         }
     }
 
