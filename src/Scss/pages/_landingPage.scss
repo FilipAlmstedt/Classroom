@@ -124,7 +124,7 @@
 
         .show-frameworks-div {
             @include flexStyling(column, center, center);
-            width: 50%;
+            width: 75%;
             
             @include desktopsOnly() {
                 @include flexStyling(row, space-evenly, center);
