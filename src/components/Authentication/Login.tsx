@@ -35,7 +35,7 @@ export const Login = () => {
 
         <>  
 
-                <div className="login-container">
+                <main className="login-container">
                 
                     <div className="login-info-img">
                         <div className="login-info-img-text">
@@ -53,6 +53,7 @@ export const Login = () => {
                             <div className="input-email">
                                 <label className="app-label login-label" htmlFor="email">Email:</label>
                                 <input
+                                    data-testid="email"
                                     id="email"
                                     className="app-input"
                                     type="text"
@@ -67,6 +68,7 @@ export const Login = () => {
                             <div className="input-password">
                                 <label className="app-label login-label" htmlFor="password">Password:</label>
                                 <input
+                                    data-testid="password"
                                     id="password"
                                     className="app-input"
                                     type="password"
@@ -85,7 +87,7 @@ export const Login = () => {
                         </div>
                     </div>
                     
-                </div>
+                </main>
        
         </>
     );

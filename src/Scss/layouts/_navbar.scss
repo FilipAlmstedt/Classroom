@@ -10,6 +10,10 @@
     .nav-a {
         color: #FFF;
         text-decoration: none;
+        transition: 0.5s ease-in-out;
+        &:hover {
+            color: orangered;
+        }
     }
 
     @include flexStyling(column, center, center);
@@ -57,10 +61,6 @@
 
                 width: 200px;
             }   
-
-            a {
-                color: white;
-            }
         }
     }
 }
