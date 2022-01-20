@@ -58,6 +58,7 @@ export const ShowPosts = () => {
         return(
                        
             <div className="post-div" key={post.id}>
+                { post?.completedPost ? <div className="app-div status-div"><div className="checkmark-icon"></div><h4 className="post-status app-h4">Solved</h4></div> : <h4 className="post-status-ongoing app-h4">Ongoing problem...</h4>}
                 <Link className="post-title-header" to={`/edit-post/${post.id}`}><h3 className="post-title-header app-h3">{post.title}</h3></Link>
                 <p className="date-text app-p">Created: {new Intl.DateTimeFormat('en-UK', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(post.date)} by: <b className="owner-text">{post.owner}</b></p>
 
