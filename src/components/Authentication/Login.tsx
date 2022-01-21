@@ -51,7 +51,7 @@ export const Login = () => {
 
                         <div className="login-inputs">
                             <div className="input-email">
-                                <label className="app-label login-label" htmlFor="email">Email:</label>
+                                <label data-testid="email-label" className="app-label login-label" htmlFor="email">Email:</label>
                                 <input
                                     data-testid="email"
                                     id="email"
@@ -66,7 +66,7 @@ export const Login = () => {
                             </div>
 
                             <div className="input-password">
-                                <label className="app-label login-label" htmlFor="password">Password:</label>
+                                <label data-testid="password-label" className="app-label login-label" htmlFor="password">Password:</label>
                                 <input
                                     data-testid="password"
                                     id="password"
@@ -81,7 +81,7 @@ export const Login = () => {
                                 <Link className="forgot-password-link app-link" to="/forgot">Forgot your password?</Link>
                             </div>
                         
-                            <button className="login-btn" onClick={login}>Log in!</button>
+                            <button data-testid="loginBtn" className="login-btn" onClick={login}>Log in!</button>
                                     
                             <Link className="app-link register-link" to="/register">Haven't got an account? Register here!</Link>
                         </div>
