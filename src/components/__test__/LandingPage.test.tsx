@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { LandingPage } from "./LandingPage";
+import { LandingPage } from "../LandingPage";
 
 test("renders the text in the hero-img", () => {
     render(<LandingPage />)
