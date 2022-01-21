@@ -3,11 +3,24 @@ import { Login } from "../Login";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
-test("Renders the right header" ,() => {
+test("Renders the elements" ,() => {
     render(<Router><Login/></Router>);
 
     const header = screen.getByText(/Sign in here!/i);
+
+    const emailLabel = screen.getByTestId("email-label");
+    const emailInput = screen.getByTestId("email");
+
+    const passwordLabel = screen.getByTestId("password-label");
+    const passwordInput = screen.getByTestId("password");
+
     expect(header).toBeInTheDocument();
+
+    expect(emailLabel).toBeInTheDocument();
+    expect(emailInput).toBeInTheDocument();
+    
+    expect(passwordLabel).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
 })
 
 test("the input tags should be empty!", async () => {
@@ -20,7 +33,7 @@ test("the input tags should be empty!", async () => {
 
 })
 
-test("change value of inputs so the work", () => {
+test("accept value of inputs so the work", () => {
     render(<Router><Login/></Router>);
 
     const emailInput = screen.getByTestId("email");
