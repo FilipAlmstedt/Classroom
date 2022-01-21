@@ -28,7 +28,8 @@
     @include desktopsOnly() {
         .status-div, .post-status-ongoing {
             @include flexStyling(row, flex-start, center);
-            margin: 20px 0px 0px 40px;
+            width: 98%;
+            margin: 20px 0px 0px 0px;
         }
     }
 
